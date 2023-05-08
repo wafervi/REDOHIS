@@ -18,7 +18,7 @@ if (empty($_SESSION["usuario"])) {
 <!DOCTYPE html> <!--Empieza el encabezado de la pagina web -->
 <html>
 <head>
-<title>Historial de expedientes | REDOHIS</title><!--Titulo de que muestra la pestaña del navegador -->
+<title>Expedientes archivados | REDOHIS</title><!--Titulo de que muestra la pestaña del navegador -->
 
 <!-- En este caso, se toma una referencia del estilo CSS que utiliza la pagina web -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -59,7 +59,7 @@ if (empty($_SESSION["usuario"])) {
 <div class="container"> 
   <div class="row justify-content-md-center">
   <div class="col-md-center">
-    <h4>ARCHIVAR EXPEDIENTES GESTIONADOS | REDOHIS</h4> <!-- Se muestra el titulo de la pagina web -->
+    <h4>EXPEDIENTES ARCHIVADOS | REDOHIS</h4> <!-- Se muestra el titulo de la pagina web -->
     <hr style="margin-top:5px;margin-bottom: 5px;">
     <div class="content"> </div>
     <div class="panel panel-primary">
@@ -143,4 +143,4 @@ for ($i=2; $i<count($REDOHIS); $i++)
 
 </html>
 
-<!-- Fuente de ayuda: Baul PHP--> 
+
