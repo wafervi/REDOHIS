@@ -13,5 +13,5 @@ Gestor Documental Personal.
 ### **Framework** 
 
 - VSCode
-- Jupyter Notebook
+- Linux
 - DBEAVER
