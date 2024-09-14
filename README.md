@@ -2,7 +2,7 @@
 
 ## **About project**
 
-Gestor Documental Personal.
+Document Management System
 
 ### **Languages used**
 
