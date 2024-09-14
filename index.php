@@ -20,7 +20,7 @@ if (empty($_SESSION["usuario"])) {
 <head>
 	<meta charset="UTF-8">
 	<title>Menú Principal | REDOHIS</title>
-	<link rel="stylesheet" href="mascarainicio.css">
+	<link rel="stylesheet" href="css/homepageskin/mascarainicio.css">
 </head>
 
 <!--desde este momento, se empieza mostrar el cuerpo de la pagina web principal -->
@@ -68,7 +68,7 @@ if (empty($_SESSION["usuario"])) {
 					<h3> Archivos de Gestión </h3>
 					<ul>
 
-						<li><a href="https://evernote.com/intl/es"Target="blank">EVERNOTE - Archivo Personal</a></li> <!-- Ya se hizo lo de los enlaces a la plataforma Evernote. --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
+						<li><a href="https://www.evernote.com/client/web?login=true#?hm=true&"Target="blank">EVERNOTE - Archivo Personal</a></li> <!-- Ya se hizo lo de los enlaces a la plataforma Evernote. --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
 
 						<li><a href="https://www.office.com/launch/onenote?auth=2" Target="blank">ONENOTE - Archivo Laboral</a></li>   <!-- Ya se hizo lo de los enlaces a la plataforma OFFICE 365 --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
 

@@ -21,20 +21,33 @@ if (empty($_SESSION["usuario"])) {
 	<title>Radicar y visualizar documentos salidos | REDOHIS</title> <!--Titulo que mostrará en la pestaña del navegador web-->
 </head>
 
-<?php 
-include('conexion.php'); # En este caso, acá empieza el codigo PHP  para que este formulario conecte con la bse de datos almacenanda en el servidor.
+<?php
+
+
+if (empty($_SESSION["usuario"])) {
+    header("Location: login.html");
+    exit();
+}
+
+include('conexion.php');
 
 $tmp = array();
 $res = array();
 
-$sel = $con->query("SELECT * FROM files");
+# Manejar búsqueda
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+# Consulta SQL con filtro de búsqueda
+$sel = $con->query("SELECT * FROM files WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%'");
+
 while ($row = $sel->fetch_assoc()) {
     $tmp = $row;
     array_push($res, $tmp);
-} # se montó la base de datos en el local host, para que enumere secuencialmente el numero de documentos.
-?> <!-- El anterior codigo PHP, se optimizó, con el fin de que se haga una consulta en la base de datos del proyecto-->
+}
+?>
 
 <html>
+
     <head>
         <meta charset="UTF-8">
         <title></title>
@@ -42,29 +55,48 @@ while ($row = $sel->fetch_assoc()) {
     </head> <!-- Se toma una referencia, para que en la pagina web, se muestre el codigo CSS establecido, se puede colocar un archivo local y ajustarlo-->
     
     <body>
+        
         <div class="container">
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-md-left">
                 <div class="col-md-center">
-                    <h1>RADICAR Y VISUALIZAR DOCUMENTOS SALIDOS | REDOHIS</h1> <!--Titulo que mostrará en la pagina web-->
+                    <h4>RADICAR Y VISUALIZAR DOCUMENTOS SALIDOS|REDOHIS</h4> <!--Titulo que mostrará en la pagina web-->
                 </div>
             </div>
 
+    <!-- Formulario de búsqueda -->
+    <div class="row justify-content-md-center mb-3">
+        <div class="col-md-8">
+            <form method="GET" action="">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar documentos" value="<?php echo htmlspecialchars($search); ?>">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
             <div class="row justify-content-md-left"> <!--SE AJUSTÓ LA PAGINA HACIA LA IZQUIERDA -->
-                <div class="col-8">
+                <div class="col-12">
 
                 <footer> <!--Se crear y ajustan los botones hacia el centro, y por encima de la tabla que muestra los datos que hacen relación a los documentos radicados -->
-                                <div align ="center">
+                <div align ="center">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar nuevo documento</button> <!--Boton para radicar un nuevo documento -->
-        
                     <a class="btn btn-primary" href="index.php">Volver a inicio <span class="sr-only">(current)</span></a><!--para volver a la pagina principal -->
-      
+                    <a class="btn btn-primary" href="cargaindex.php">Expedientes archivados <span class="sr-only">(current)</span></a>
+                    <hr style="margin-top:10px;margin-bottom: 10px;">
+                    
                 </div>
+                <div align ="center">
+            </div>
+
 
 <!-- En el siguiente fragmento de codigo, se muestra como se mostrará la estructura de la tabla,  -->
                     <table class="table"> <!-- SE PONE TABLA PARA AJUSTARLA EN TODA LA PANTALLA -->
                     <thead class="thead-dark"> <!-- SE PONE AL ENCABEZADO DE LA TABLA UN COLOR NEGRITO -->
                             <tr>
-                                <th scope="col">No. de orden</th>
+                                <th scope="col">#</th>
                                 <th scope="col">Número de Radicado</th>
                                 <th scope="col">Fecha de carga del documento</th>
                                 <th scope="col">Fecha del documento</th>
@@ -74,6 +106,7 @@ while ($row = $sel->fetch_assoc()) {
                                 <th scope="col">Destinatario</th>
                                 <th scope="col">Dirección o Correo Electrónico</th>
                                 <th scope="col">Acciones</th><!--Boton para dar clic-->
+
                             </tr><!-- termina el codigo, que se muestra como se mostrará la estructura de la tabla,  -->
                         </thead>
                        
@@ -92,6 +125,7 @@ while ($row = $sel->fetch_assoc()) {
                                     <td>
                                         <button onclick="openModelPDF('<?php echo $val['url'] ?>')" class="btn btn-primary" type="button">Visualizar Documento</button><!--la acción que debe ejecutar la maquina, al momento de presionar ael boton visualizar documento es mostrar la ventana, que visualizará el documento PDF, ver lineas 161 a 178-->
                                     </td>
+
                                 </tr> 
                             <?php } ?>
                         </tbody>
@@ -99,7 +133,7 @@ while ($row = $sel->fetch_assoc()) {
                 </div>
             </div>
         </div>
-        
+   
   <!--En este fragmento, se diseña y optimiza un modal, cuando se habla de modal, es la ventana flotante en donde se puede visualizar los documentos PDF.-->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -225,9 +259,11 @@ while ($row = $sel->fetch_assoc()) {
                                 <p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p>
         </div>
 
+
+
+
  </body><!--Termina el cuerpo de la pagina o modulo -->
 
 </html>
-
 
 <!--TODO: --SE DEBE HACER UNA BARRA DE BÚSQUEDA, COMO APOYO, SE PUEDE APOYAR DE https://www.jose-aguilar.com/blog/search-simple-php/-->

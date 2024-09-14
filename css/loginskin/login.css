@@ -5,7 +5,7 @@ body, html {
     height: 100%;
     background-repeat: no-repeat;
     /*background-image: linear-gradient(135deg, rgba(31,123,229,1) 0%, rgba(58,139,232,1) 47%, rgba(70,153,234,1) 92%, rgba(72,156,234,1) 100%);*/
-    background: url(blue.jpg) no-repeat center center fixed;
+    background: url(aquamarine.jpg) no-repeat center center fixed;
     background-size: 100% 100%;
 }
 
@@ -99,10 +99,10 @@ body, html {
 }
 
 .form-signin .form-control:focus {
-    border-color: rgb(104, 145, 162);
+    border-color: rgb(35, 75, 195);
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #243ebc;
 }
 
 .btn.btn-signin {
