@@ -14,59 +14,69 @@
     <div class="center">
       <h4>EXPEDIENTES ARCHIVADOS | REDOHIS</h4>
       <hr style="margin-top:10px;margin-bottom: 10px;">
-      <div align ="center">
-        
+      <div align="center">
 
-      <!-- Barra de búsqueda -->
-      <div class="input-group">
-        <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
-        <hr style="margin-top:30px;margin-bottom: 30px;">
-      </div>
-      
-
-
-      <div align ="center">                     
-        <a class="btn btn-primary" href="index.php">Volver a inicio <span class="sr-only">(current)</span></a><!--para volver a la pagina principal -->  
-        <a class="btn btn-primary" href="cargardoc.php">Docs radicados <span class="sr-only">(current)</span></a>
-        <hr style="margin-top:10px;margin-bottom: 10px;">
-      </div>
-      <div align ="center">
-
-
-
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Lista de Expedientes Archivados</h3>
+        <!-- Barra de búsqueda -->
+        <div class="input-group">
+          <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
+          <hr style="margin-top:30px;margin-bottom: 30px;">
         </div>
-        <div class="panel-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th width="7%">#</th>
-                <th width="70%">Nombre del Expediente</th>
-                <th width="13%">Descargar una copia</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $REDOHIS = scandir("exp");
-              $num = 0;
-              for ($i = 2; $i < count($REDOHIS); $i++) {
-                $num++;
-              ?>
-              <tr>
-                <th scope="row"><?php echo $num; ?></th>
-                <td><?php echo $REDOHIS[$i]; ?></td>
-                <td>
-                  <a title="Descargar Archivo" href="exp/<?php echo $REDOHIS[$i]; ?>" download="<?php echo $REDOHIS[$i]; ?>" style="color: red; font-size:18px;">
-                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-                  </a>
-                </td>
-              </tr>
-              <?php } ?>
-            </tbody>
-          </table>
+
+        <!-- Botones de navegación -->
+        <div align="center">                     
+          <a class="btn btn-primary" href="index.php">Volver a inicio <span class="sr-only">(current)</span></a>
+          <a class="btn btn-primary" href="cargardoc.php">Docs radicados <span class="sr-only">(current)</span></a>
+          <hr style="margin-top:10px;margin-bottom: 10px;">
         </div>
+
+        <!-- Formulario para cargar archivo .zip -->
+        <div align="center">
+          <form action="uploadzip.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="zipFile">Subir expediente en formato .zip</label>
+              <input type="file" name="zipFile" id="zipFile" class="form-control" accept=".zip">
+            </div>
+            <button type="submit" class="btn btn-primary">Cargar expediente</button>
+          </form>
+          <hr style="margin-top:20px;margin-bottom: 20px;">
+        </div>
+
+        <!-- Lista de expedientes archivados -->
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Lista de Expedientes Archivados</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th width="7%">#</th>
+                  <th width="70%">Nombre del Expediente</th>
+                  <th width="13%">Descargar una copia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $REDOHIS = scandir("exp");
+                $num = 0;
+                for ($i = 2; $i < count($REDOHIS); $i++) {
+                  $num++;
+                ?>
+                <tr>
+                  <th scope="row"><?php echo $num; ?></th>
+                  <td><?php echo $REDOHIS[$i]; ?></td>
+                  <td>
+                    <a title="Descargar Archivo" href="exp/<?php echo $REDOHIS[$i]; ?>" download="<?php echo $REDOHIS[$i]; ?>" style="color: red; font-size:18px;">
+                      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                    </a>
+                  </td>
+                </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -93,10 +103,8 @@
 
 </body>
 <footer>
-
-                <div align ="center">
-                                <p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p>
-                </div>
+  <div align="center">
+    <p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p>
   </div>
 </footer>
 </html>
