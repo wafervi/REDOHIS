@@ -73,6 +73,12 @@ if (empty($_SESSION["usuario"])) {
 						<li><a href="https://www.office.com/launch/onenote?auth=2" Target="blank">ONENOTE - Archivo Laboral</a></li>   <!-- Ya se hizo lo de los enlaces a la plataforma OFFICE 365 --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
 
 					</ul>
+
+					<h3> Repositorios de Software </h3>
+					<ul>
+
+						<li><a href="https://github.com/wagnerfv1117?tab=repositories"Target="blank">GitHub</a></li> <!-- Ya se hizo lo de los enlaces a la plataforma Evernote. --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
+					</ul>
 				</div>
 			</aside>
 		</div>
