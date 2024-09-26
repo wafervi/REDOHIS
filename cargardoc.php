@@ -85,6 +85,7 @@ while ($row = $sel->fetch_assoc()) {
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar nuevo documento</button> <!--Boton para radicar un nuevo documento -->
                     <a class="btn btn-primary" href="index.php">Volver a inicio <span class="sr-only">(current)</span></a><!--para volver a la pagina principal -->
                     <a class="btn btn-primary" href="cargaindex.php">Expedientes archivados <span class="sr-only">(current)</span></a>
+                    <a class="btn btn-primary" href="/REDOHIS/crud/trc.php">Trazabilidad <span class="sr-only">(current)</span></a>
                     <hr style="margin-top:10px;margin-bottom: 10px;">
                     
                 </div>
