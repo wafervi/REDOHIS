@@ -91,7 +91,7 @@ $dir = "posters/";
         <div align ="center">
             <div class="col-auto">
                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoModal"><i class="fa-solid fa-circle-plus"></i> Nuevo comentario</a>
-                <a class="btn btn-primary" href="/REDOHIS2/index.php">Volver a inicio <span class="sr-only">(current)</span></a>
+                <a class="btn btn-primary" href="/REDOHIS/index.php">Volver a inicio <span class="sr-only">(current)</span></a>
             </div>
         </div>
 
