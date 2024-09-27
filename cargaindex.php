@@ -104,7 +104,7 @@
 </body>
 <footer>
   <div align="center">
-    <p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p>
+  <p class="text-center">Desarrollado por <a href="https://github.com/wagnerfv1117">@wagnerfv1117 - SAGEN - CAGESDO - © 2021</a></p>
   </div>
 </footer>
 </html>

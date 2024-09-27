@@ -257,7 +257,7 @@ while ($row = $sel->fetch_assoc()) {
 
        <footer> <!--Para el pie de pagina, se hace colocar el nobre del autor, alineado al centro -->
                                 <div align ="center">
-                                <p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p>
+                                <p class="text-center">Desarrollado por <a href="https://github.com/wagnerfv1117">@wagnerfv1117 - SAGEN - CAGESDO - © 2021</a></p>
         </div>
 
 
