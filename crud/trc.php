@@ -15,7 +15,7 @@ session_start();
 
 if (empty($_SESSION["usuario"])) {
     # Lo redireccionamos al formulario de inicio de sesión
-    header("Location: /REDOHIS/login.html");
+    header("Location: login.html");
     # Y salimos del script
     exit();
 }
@@ -34,6 +34,22 @@ $fileTitles = [];
 while ($row = $filesResult->fetch_assoc()) {
     $fileTitles[$row['id']] = $row['title'];
 }
+
+
+// Manejar la consulta de búsqueda y filtrar resultados
+$searchQuery = "";
+if (isset($_GET['search'])) {
+    $searchQuery = filter_var($_GET['search'], FILTER_SANITIZE_STRING); // Sanitizar el término de búsqueda
+}
+
+$sqlPeliculas = "SELECT p.id, p.nombre, p.descripcion, g.nombre AS genero FROM pelicula AS p
+INNER JOIN genero AS g ON p.id_genero=g.id";
+
+// Agregar cláusula WHERE para la consulta de búsqueda si se proporciona
+if (!empty($searchQuery)) {
+    $sqlPeliculas .= " WHERE p.nombre LIKE '%$searchQuery%' OR p.descripcion LIKE '%$searchQuery%'";
+}
+
 
 $dir = "posters/";
 
@@ -56,7 +72,7 @@ $dir = "posters/";
 
     <div class="container py-3">
 
-        <h4 class="text-rigth">TRAZABILIDAD | REDOHIS</h4>
+        <h2 class="text-rigth">TRAZABILIDAD (modo prueba) | REDOHIS</h2>
 
         <hr>
 
@@ -75,8 +91,7 @@ $dir = "posters/";
         <div align ="center">
             <div class="col-auto">
                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoModal"><i class="fa-solid fa-circle-plus"></i> Nuevo comentario</a>
-                <a class="btn btn-primary" href="/REDOHIS/index.php">Volver a inicio <span class="sr-only">(current)</span></a>
-                <a class="btn btn-primary" href="/REDOHIS/cargardoc.php">Docs radicados <span class="sr-only">(current)</span></a>
+                <a class="btn btn-primary" href="/REDOHIS2/index.php">Volver a inicio <span class="sr-only">(current)</span></a>
             </div>
         </div>
 
@@ -96,8 +111,9 @@ $dir = "posters/";
             <tbody>
                 <?php while ($row = $peliculas->fetch_assoc()) { ?>
                     <tr>
-                        <td><?= isset($fileTitles[$row['id']]) ? $fileTitles[$row['id']] : 'No hay archivo'; ?></td> <td>
-                        </td>
+                       <td><?= isset($fileTitles[$row['id']]) ? $fileTitles[$row['id']] : 'No hay archivo'; ?></td> <td>
+                       </td>
+                        
                         <td><?= $row['nombre']; ?></td>
                         <td><?= $row['descripcion']; ?></td>
                         <td><?= $row['genero']; ?></td>
