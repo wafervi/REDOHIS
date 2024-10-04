@@ -72,7 +72,7 @@ $dir = "posters/";
 
     <div class="container py-3">
 
-        <h2 class="text-rigth">Comentarios (modo prueba) | REDOHIS</h2>
+        <h2 class="text-rigth">Comentarios (versión beta) | REDOHIS</h2>
 
         <hr>
 
