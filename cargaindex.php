@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Expedientes archivados | REDOHIS</title>
+<title>Expedientes archivados | REDOHIS/title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/opt/lampp/htdocs/REDOHIS/css/expskin/min2.css">
 <script src="/opt/lampp/htdocs/REDOHIS/jquery/exp1.js"></script>
