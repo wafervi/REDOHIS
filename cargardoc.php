@@ -85,13 +85,44 @@ while ($row = $sel->fetch_assoc()) {
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar nuevo documento</button> <!--Boton para radicar un nuevo documento -->
                     <a class="btn btn-primary" href="index.php">Volver a inicio <span class="sr-only">(current)</span></a><!--para volver a la pagina principal -->
                     <a class="btn btn-primary" href="cargaindex.php">Expedientes archivados <span class="sr-only">(current)</span></a>
+                    <a class="btn btn-primary" href="logout.php"> cerrar sesión <span class="sr-only">(current)</span></a>
+                
                     <hr style="margin-top:10px;margin-bottom: 10px;">
+                    
                     
                 </div>
                 <div align ="center">
             </div>
 
 
+<?php
+        // Número de registros por página
+        $limit = 5;
+
+        // Página actual
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $page = max($page, 1); // Asegurarse de que la página sea al menos 1
+
+        // Calcular el offset
+        $offset = ($page - 1) * $limit;
+
+        // Contar el total de registros
+        $totalQuery = $con->query("SELECT COUNT(*) as total FROM files WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%'");
+        $totalRow = $totalQuery->fetch_assoc();
+        $totalRecords = $totalRow['total'];
+
+        // Calcular el total de páginas
+        $totalPages = ceil($totalRecords / $limit);
+
+        // Consulta SQL con límite y offset
+        $sel = $con->query("SELECT * FROM files WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%' LIMIT $limit OFFSET $offset");
+
+        $res = [];
+        while ($row = $sel->fetch_assoc()) {
+            $res[] = $row;
+        }
+        ?>
+        
 <!-- En el siguiente fragmento de codigo, se muestra como se mostrará la estructura de la tabla,  -->
                     <table class="table"> <!-- SE PONE TABLA PARA AJUSTARLA EN TODA LA PANTALLA -->
                     <thead class="thead-dark"> <!-- SE PONE AL ENCABEZADO DE LA TABLA UN COLOR NEGRITO -->
@@ -99,6 +130,7 @@ while ($row = $sel->fetch_assoc()) {
                                 <th scope="col">#</th>
                                 <th scope="col">Número de Radicado</th>
                                 <th scope="col">Fecha de carga del documento</th>
+                                <th scope="col">Número de Páginas</th>
                                 <th scope="col">Fecha del documento</th>
                                 <th scope="col">Título del documento</th>
                                 <th scope="col">Asunto del documento</th>
@@ -116,6 +148,7 @@ while ($row = $sel->fetch_assoc()) {
                                     <td><?php echo $val['id'] ?> </td> <!--Estas son las columnas que se encuentran en la base datos del proyecto-->
                                     <td><?php echo $val['pin'] ?> </td>
                                     <td><?php echo $val['date'] ?> </td>
+                                    <td><?php echo $val['pages'] ?> </td>
                                     <td><?php echo $val['dater'] ?> </td>
                                     <td><?php echo $val['title'] ?></td>
                                     <td><?php echo $val['description'] ?></td>
@@ -157,6 +190,11 @@ while ($row = $sel->fetch_assoc()) {
                             <div class="form-group">
                                 <label for="description">Remitente</label>
                                 <input type="text" class="form-control" id="sender" name="sender">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pages">Páginas</label>
+                                <input type="text" class="form-control" id="pages" name="pages">
                             </div>
                             
                             <div class="form-group">
@@ -256,14 +294,37 @@ while ($row = $sel->fetch_assoc()) {
 
        <footer> <!--Para el pie de pagina, se hace colocar el nobre del autor, alineado al centro -->
                                 <div align ="center">
-                                <p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p>
+                                <p>Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © 2021</p> 
         </div>
+<!-- Paginación -->
+        <div class="row justify-content-md-center">
+            <nav>
+                <ul class="pagination">
+                    <?php if ($page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?php echo htmlspecialchars($search); ?>&page=<?php echo $page - 1; ?>">Anterior</a>
+                        </li>
+                    <?php endif; ?>
 
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                            <a class="page-link" href="?search=<?php echo htmlspecialchars($search); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
 
-
+                    <?php if ($page < $totalPages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?php echo htmlspecialchars($search); ?>&page=<?php echo $page + 1; ?>">Siguiente</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
 
  </body><!--Termina el cuerpo de la pagina o modulo -->
 
+
+
+ 
 </html>
 
-<!--TODO: --SE DEBE HACER UNA BARRA DE BÚSQUEDA, COMO APOYO, SE PUEDE APOYAR DE https://www.jose-aguilar.com/blog/search-simple-php/-->

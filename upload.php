@@ -4,12 +4,14 @@ include('conexion.php');#se procede con utilizar el metodo POST, para cargar los
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dater = $con->real_escape_string(htmlentities($_POST['dater']));
+    $pages = $con->real_escape_string(htmlentities($_POST['pages']));
     $title = $con->real_escape_string(htmlentities($_POST['title']));
     $description = $con->real_escape_string(htmlentities($_POST['description']));
     $sender = $con->real_escape_string(htmlentities($_POST['sender']));
     $adresse = $con->real_escape_string(htmlentities($_POST['adresse']));
     $adress = $con->real_escape_string(htmlentities($_POST['adress']));
     $pin = $con->real_escape_string(htmlentities($_POST['pin']));
+    
 
     #se toman los datos definidos como variables, para que se puedan almacenar en la base de datos.
     # se procede a montar el algoritmo, para cargar el archivo PDF en la base de datos y la carpeta dentro del proyecto.
@@ -35,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
    #luego se hace una consulta mediante INSERT INTO* de los datos escritos en el formulario (cargardoc.php) para que sean almacenados.
-    $ins = $con->query("INSERT INTO files(title,description,sender,adresse,adress,dater,pin,url) VALUES ('$title','$description','$sender','$adresse','$adress','$dater','$pin','$new_name_file')");
+    $ins = $con->query("INSERT INTO files(title,description,sender,adresse,adress,dater,pages,pin,url) VALUES ('$title','$description','$sender','$adresse','$adress','$dater','$pages','$pin','$new_name_file')");
 
    #se proyecta un mensaje o cuadro de dialogo. 
     if ($ins) {
