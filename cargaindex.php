@@ -9,6 +9,7 @@
 <link rel='stylesheet prefetch' href='/opt/lampp/htdocs/REDOHIS/css/expskin/min3.css'>
 </head>
 
+<body>
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="center">
@@ -26,6 +27,7 @@
         <div align="center">                     
           <a class="btn btn-primary" href="index.php">Volver a inicio <span class="sr-only">(current)</span></a>
           <a class="btn btn-primary" href="cargardoc.php">Docs radicados <span class="sr-only">(current)</span></a>
+          <a class="btn btn-primary" href="logout.php">Cerrar sesión<span class="sr-only">(current)</span></a>
           <hr style="margin-top:10px;margin-bottom: 10px;">
         </div>
 
@@ -55,11 +57,17 @@
                   <th width="13%">Descargar una copia</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="expedientes">
                 <?php
                 $REDOHIS = scandir("exp");
                 $num = 0;
-                for ($i = 2; $i < count($REDOHIS); $i++) {
+                $perPage = 5; // Número de registros por página
+                $totalFiles = count($REDOHIS) - 2; // Excluyendo "." y ".."
+                $totalPages = ceil($totalFiles / $perPage);
+                $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                $start = ($currentPage - 1) * $perPage + 2;
+
+                for ($i = $start; $i < $start + $perPage && $i < count($REDOHIS); $i++) {
                   $num++;
                 ?>
                 <tr>
@@ -77,6 +85,27 @@
           </div>
         </div>
 
+        <!-- Paginación -->
+        <nav>
+          <ul class="pagination">
+            <?php if ($currentPage > 1) { ?>
+              <li>
+                <a href="?page=<?php echo $currentPage - 1; ?>">Anterior</a>
+              </li>
+            <?php } ?>
+            <?php for ($page = 1; $page <= $totalPages; $page++) { ?>
+              <li class="<?php echo ($page == $currentPage) ? 'active' : ''; ?>">
+                <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+              </li>
+            <?php } ?>
+            <?php if ($currentPage < $totalPages) { ?>
+              <li>
+                <a href="?page=<?php echo $currentPage + 1; ?>">Siguiente</a>
+              </li>
+            <?php } ?>
+          </ul>
+        </nav>
+
       </div>
     </div>
   </div>
@@ -88,11 +117,11 @@
 <script>
   document.getElementById('search').addEventListener('keyup', function() {
     var input = document.getElementById('search').value.toLowerCase();
-    var rows = document.querySelectorAll('table tbody tr');
-    
+    var rows = document.querySelectorAll('tbody tr');
+
     rows.forEach(function(row) {
-      var expediente = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-      if (expediente.includes(input)) {
+      var expediente = row.querySelector('td:nth-child(2)');
+      if (expediente && expediente.innerText.toLowerCase().includes(input)) {
         row.style.display = '';
       } else {
         row.style.display = 'none';
@@ -101,10 +130,10 @@
   });
 </script>
 
-</body>
 <footer>
   <div align="center">
-    <p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p>
+    <p>Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © 2021</p> 
   </div>
 </footer>
+</body>
 </html>

@@ -77,7 +77,7 @@ if (empty($_SESSION["usuario"])) {
 					<h3> Repositorios de Software </h3>
 					<ul>
 
-						<li><a href="https://github.com/wagnerfv1117?tab=repositories"Target="blank">GitHub</a></li> <!-- Ya se hizo lo de los enlaces a la plataforma Evernote. --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
+						<li><a href="https://github.com/wafervi?tab=repositories"Target="blank">GitHub</a></li> <!-- Ya se hizo lo de los enlaces a la plataforma Evernote. --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
 					</ul>
 				</div>
 			</aside>
@@ -86,7 +86,7 @@ if (empty($_SESSION["usuario"])) {
 	
 	<footer>
 		<div class="wrapp">
-			<p>Documentado por: @wagnerfv1117 - SAGEN - CAGESDO - © 2021</p> <!--esto se muestra en el parte inferior de la pagina web-->
+			<p>Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © 2021</p> <!--esto se muestra en el parte inferior de la pagina web-->
 		</div>
 	</footer>
 
