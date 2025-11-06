@@ -25,9 +25,10 @@
 
         <!-- Botones de navegación -->
         <div align="center">                     
-          <a class="btn btn-primary" href="index.php">Volver a inicio <span class="sr-only">(current)</span></a>
-          <a class="btn btn-primary" href="cargardoc.php">Docs radicados <span class="sr-only">(current)</span></a>
-          <a class="btn btn-primary" href="logout.php">Cerrar sesión<span class="sr-only">(current)</span></a>
+          <a class="btn btn-primary" href="index.php">Volver a Inicio <span class="sr-only">(current)</span></a>
+          <a class="btn btn-primary" href="cargardoc.php">Docs Salidos <span class="sr-only">(current)</span></a>
+          <a class="btn btn-primary" href="cargardocr.php">Docs Recibidos <span class="sr-only">(current)</span></a>
+          <a class="btn btn-primary" href="logout.php">Cerrar Sesión<span class="sr-only">(current)</span></a>
           <hr style="margin-top:10px;margin-bottom: 10px;">
         </div>
 

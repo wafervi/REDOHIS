@@ -32,9 +32,10 @@ if (empty($_SESSION["usuario"])) {
 			</div>
 			<nav>
 				<ul> <!--estos son los botones, para poder redireccionar a las tareas del sistema-->
-					<li><a href="cargardoc.php">Ver o radicar Documentos salidos</a></li>
-					<li><a href="cargaindex.php">Consultar expedientes archivados</a></li>
-					<li><a href="logout.php">Cerrar sesión</a></li>
+					<li><a href="cargardoc.php">Documentos Salidos</a></li>
+					<li><a href="cargardocr.php">Documentos Recibidos</a></li>
+					<li><a href="cargaindex.php">Expedientes Archivados</a></li>
+					<li><a href="logout.php">Cerrar Sesión</a></li>
 				</ul>
 			</nav>
 		</div>

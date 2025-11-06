@@ -38,7 +38,7 @@ $res = array();
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 # Consulta SQL con filtro de búsqueda
-$sel = $con->query("SELECT * FROM files WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%'");
+$sel = $con->query("SELECT * FROM filer WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%'");
 
 while ($row = $sel->fetch_assoc()) {
     $tmp = $row;
@@ -59,7 +59,7 @@ while ($row = $sel->fetch_assoc()) {
         <div class="container">
             <div class="row justify-content-md-left">
                 <div class="col-md-center">
-                    <h4>RADICAR Y VISUALIZAR DOCUMENTOS SALIDOS|REDOHIS</h4> <!--Titulo que mostrará en la pagina web-->
+                    <h4>RADICAR Y VISUALIZAR DOCUMENTOS RECIBIDOS|REDOHIS</h4> <!--Titulo que mostrará en la pagina web-->
                 </div>
             </div>
 
@@ -107,7 +107,7 @@ while ($row = $sel->fetch_assoc()) {
         $offset = ($page - 1) * $limit;
 
         // Contar el total de registros
-        $totalQuery = $con->query("SELECT COUNT(*) as total FROM files WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%'");
+        $totalQuery = $con->query("SELECT COUNT(*) as total FROM filer WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%'");
         $totalRow = $totalQuery->fetch_assoc();
         $totalRecords = $totalRow['total'];
 
@@ -115,7 +115,7 @@ while ($row = $sel->fetch_assoc()) {
         $totalPages = ceil($totalRecords / $limit);
 
         // Consulta SQL con límite y offset
-        $sel = $con->query("SELECT * FROM files WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%' LIMIT $limit OFFSET $offset");
+        $sel = $con->query("SELECT * FROM filer WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR sender LIKE '%$search%' OR adresse LIKE '%$search%' LIMIT $limit OFFSET $offset");
 
         $res = [];
         while ($row = $sel->fetch_assoc()) {
@@ -275,7 +275,7 @@ while ($row = $sel->fetch_assoc()) {
 
                                     }
                                 };
-                                xhttp.open("POST", "upload.php", true);
+                                xhttp.open("POST", "uploadfiler.php", true);
                                 xhttp.send(data);
                                 $('#form1').trigger('reset');
                             }
