@@ -310,9 +310,7 @@ while ($row = $sel->fetch_assoc()) {
             <div class="modal-body">
                 <iframe id="iframePDF" frameborder="0"></iframe>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            </div>
+
         </div>
     </div>
 </div>
