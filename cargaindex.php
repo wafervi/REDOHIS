@@ -186,7 +186,7 @@ if (empty($_SESSION["usuario"])) {
         </div>
 
         <footer class="text-center mt-3 mb-4">
-            <p class="small">Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © 2021</p>
+            <p class="small">Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © <?php echo date('Y'); ?></p>
         </footer>
     </div>
 </div>
