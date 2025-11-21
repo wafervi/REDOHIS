@@ -18,7 +18,7 @@ if (empty($_SESSION["usuario"])) {
 <!DOCTYPE html> 
 <head> <!-- Aquí empieza el encabezado del modulo para radicar documentos-->
 	<meta charset="UTF-8">
-	<title>Radicar y visualizar documentos salidos | REDOHIS</title> <!--Titulo que mostrará en la pestaña del navegador web-->
+	<title>Radicar y visualizar documentos recibidos | REDOHIS</title> <!--Titulo que mostrará en la pestaña del navegador web-->
 </head>
 
 <?php
