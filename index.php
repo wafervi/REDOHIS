@@ -1,5 +1,5 @@
 <?php
-# Página de inicio con barra superior y barra lateral izquierda (basada en cargadoc2.php)
+# Página de inicio con barra superior y barra lateral izquierda (basada en cargadoc.php)
 
 session_start();
 
@@ -28,7 +28,7 @@ function safe_output($s) {
           crossorigin="anonymous">
 
     <style>
-        /* Basado en el ejemplo cargadoc2.php */
+        /* Basado en el ejemplo cargardoc.php */
         #sidebar {
             min-height: 100vh;
             width: 220px;
@@ -78,7 +78,7 @@ function safe_output($s) {
             <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
             <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
-            <a class="list-group-item list-group-item-action" href="index.php">Gestionar Usuario y Contraseña</a> <!--Módulo para la actualización v2.5 -->
+            <a class="list-group-item list-group-item-action" href="index.php">Gestionar Usuario y Contraseña</a> <!--Módulo para la actualización v4.0 -->
         </div>
         <hr>
         <p class="small text-muted mb-0">Usuario conectado: <?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
