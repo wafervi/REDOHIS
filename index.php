@@ -78,7 +78,7 @@ function safe_output($s) {
             <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
             <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
-            <a class="list-group-item list-group-item-action" href="index.php">Gestionar Usuario y Contraseña</a>
+            <a class="list-group-item list-group-item-action" href="index.php">Gestionar Usuario y Contraseña</a> <!--Módulo para la actualización v2.5 -->
         </div>
         <hr>
         <p class="small text-muted mb-0">Usuario conectado: <?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
