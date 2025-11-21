@@ -106,9 +106,9 @@ while ($row = $sel->fetch_assoc()) {
             <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">
                 Recibir Nuevo Documento
             </button>
-            <a class="list-group-item list-group-item-action" href="cargadoc2.php">Documentos Salidos</a>
-            <a class="list-group-item list-group-item-action" href="cargaindex1.php">Expedientes Archivados</a>
-            <a class="list-group-item list-group-item-action" href="index2.php">Volver a Inicio</a>
+            <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
+            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
 
         </div>
         <hr>
@@ -142,8 +142,8 @@ while ($row = $sel->fetch_assoc()) {
         <div class="d-block d-md-none mb-3">
             <div class="btn-group btn-group-sm" role="group" aria-label="Menú móvil">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar</button>
-                <a class="btn btn-secondary" href="index2.php">Inicio</a>
-                <a class="btn btn-secondary" href="cargaindex1.php">Archivados</a>
+                <a class="btn btn-secondary" href="index.php">Inicio</a>
+                <a class="btn btn-secondary" href="cargaindex.php">Archivados</a>
             </div>
         </div>
 
@@ -290,7 +290,7 @@ while ($row = $sel->fetch_assoc()) {
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="onSubmitForm()">1- Guardar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">2- Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">2- Cerrar</button> <!-- location.reload() para actualizar la pagina al momento de insertar datos en la Base de Datos -->
             </div>
         </div>
     </div>
@@ -370,8 +370,5 @@ while ($row = $sel->fetch_assoc()) {
 
 
 </script>
-
-
-
 </body>
 </html>
