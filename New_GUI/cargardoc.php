@@ -107,8 +107,8 @@ while ($row = $sel->fetch_assoc()) {
                 Radicar Nuevo Documento
             </button>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
-            <a class="list-group-item list-group-item-action" href="cargaindex1.php">Expedientes Archivados</a>
-            <a class="list-group-item list-group-item-action" href="index2.php">Volver a Inicio</a>
+            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
 
 
         </div>
@@ -291,7 +291,7 @@ while ($row = $sel->fetch_assoc()) {
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="onSubmitForm()">1- Guardar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">2- Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">2- Cerrar</button> <!-- location.reload() para actualizar la pagina al momento de insertar datos en la Base de Datos -->
             </div>
         </div>
     </div>
@@ -369,6 +369,5 @@ while ($row = $sel->fetch_assoc()) {
         $('#modalPdf').modal('show');
     }
 </script>
-
 </body>
 </html>

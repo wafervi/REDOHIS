@@ -56,12 +56,9 @@ if (empty($_SESSION["usuario"])) {
     <div class="p-3">
         <h6>Menú</h6>
         <div class="list-group">
-            <a class="list-group-item list-group-item-action" href="cargadoc2.php">Documentos Salidos</a>
+            <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
-            <a class="list-group-item list-group-item-action" href="index2.php">Volver a Inicio</a>
-
-
-
+            <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
         </div>
         <hr>
         <p class="small text-muted mb-0">Usuario conectado: <?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
@@ -82,8 +79,8 @@ if (empty($_SESSION["usuario"])) {
         <div class="mb-3 d-block d-md-none">
             <div class="btn-group btn-group-sm" role="group">
                 <a class="btn btn-primary" href="index.php">Inicio</a>
-                <a class="btn btn-secondary" href="cargadoc2.php">Docs Salidos</a>
-                <a class="btn btn-secondary" href="cargardocr.php">Docs Recibidos</a>
+                <a class="btn btn-secondary" href="cargardoc.php">Documentos Salidos</a> 
+                <a class="btn btn-secondary" href="cargardocr.php">Documentos Recibidos</a>
             </div>
         </div>
 
@@ -152,7 +149,7 @@ if (empty($_SESSION["usuario"])) {
                                         echo '<th scope="row">' . $num++ . '</th>';
                                         echo '<td>' . $safeName . '</td>';
                                         echo '<td><a title="Descargar Archivo" href="' . $fileUrl . '" download="' . $safeName . '" style="color: red; font-size:18px;"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Descargar</a></td>';
-                                        echo '</tr>';
+                                        echo '</tr>'; 
                                     }
                                 }
                                 ?>
@@ -235,6 +232,5 @@ if (empty($_SESSION["usuario"])) {
         });
     });
 </script>
-
 </body>
 </html>
