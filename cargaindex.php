@@ -1,140 +1,236 @@
+<?php
+session_start();
+if (empty($_SESSION["usuario"])) {
+    header("Location: login.html");
+    exit();
+}
+?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<title>Expedientes archivados | REDOHIS</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="/opt/lampp/htdocs/REDOHIS/css/expskin/min2.css">
-<script src="/opt/lampp/htdocs/REDOHIS/jquery/exp1.js"></script>
-<script src="/opt/lampp/htdocs/REDOHIS/jquery/exp2.js"></script>
-<link rel='stylesheet prefetch' href='/opt/lampp/htdocs/REDOHIS/css/expskin/min3.css'>
+    <meta charset="UTF-8">
+    <title>Expedientes archivados | REDOHIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 4.5 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+
+    <style>
+        /* Sidebar */
+        #sidebar {
+            min-height: 100vh;
+            width: 220px;
+        }
+
+        .content-with-sidebar {
+            margin-left: 0;
+        }
+
+        @media (min-width: 768px) {
+            .content-with-sidebar {
+                margin-left: 220px;
+            }
+        }
+
+        /* Table responsive */
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
 </head>
-
 <body>
-<div class="container">
-  <div class="row justify-content-md-center">
-    <div class="center">
-      <h4>EXPEDIENTES ARCHIVADOS | REDOHIS</h4>
-      <hr style="margin-top:10px;margin-bottom: 10px;">
-      <div align="center">
 
-        <!-- Barra de búsqueda -->
-        <div class="input-group">
-          <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
-          <hr style="margin-top:30px;margin-bottom: 30px;">
-        </div>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
+    <a class="navbar-brand" href="#">REDOHIS</a>
 
-        <!-- Botones de navegación -->
-        <div align="center">                     
-          <a class="btn btn-primary" href="index.php">Volver a Inicio <span class="sr-only">(current)</span></a>
-          <a class="btn btn-primary" href="cargardoc.php">Docs Salidos <span class="sr-only">(current)</span></a>
-          <a class="btn btn-primary" href="cargardocr.php">Docs Recibidos <span class="sr-only">(current)</span></a>
-          <a class="btn btn-primary" href="logout.php">Cerrar Sesión<span class="sr-only">(current)</span></a>
-          <hr style="margin-top:10px;margin-bottom: 10px;">
-        </div>
-
-        <!-- Formulario para cargar archivo .zip -->
-        <div align="center">
-          <form action="uploadzip.php" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-              <label for="zipFile">Subir expediente en formato .zip</label>
-              <input type="file" name="zipFile" id="zipFile" class="form-control" accept=".zip">
-            </div>
-            <button type="submit" class="btn btn-primary">Cargar expediente</button>
-          </form>
-          <hr style="margin-top:20px;margin-bottom: 20px;">
-        </div>
-
-        <!-- Lista de expedientes archivados -->
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Lista de Expedientes Archivados</h3>
-          </div>
-          <div class="panel-body">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th width="7%">#</th>
-                  <th width="70%">Nombre del Expediente</th>
-                  <th width="13%">Descargar una copia</th>
-                </tr>
-              </thead>
-              <tbody id="expedientes">
-                <?php
-                $REDOHIS = scandir("exp");
-                $num = 0;
-                $perPage = 5; // Número de registros por página
-                $totalFiles = count($REDOHIS) - 2; // Excluyendo "." y ".."
-                $totalPages = ceil($totalFiles / $perPage);
-                $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                $start = ($currentPage - 1) * $perPage + 2;
-
-                for ($i = $start; $i < $start + $perPage && $i < count($REDOHIS); $i++) {
-                  $num++;
-                ?>
-                <tr>
-                  <th scope="row"><?php echo $num; ?></th>
-                  <td><?php echo $REDOHIS[$i]; ?></td>
-                  <td>
-                    <a title="Descargar Archivo" href="exp/<?php echo $REDOHIS[$i]; ?>" download="<?php echo $REDOHIS[$i]; ?>" style="color: red; font-size:18px;">
-                      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-                    </a>
-                  </td>
-                </tr>
-                <?php } ?>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Paginación -->
-        <nav>
-          <ul class="pagination">
-            <?php if ($currentPage > 1) { ?>
-              <li>
-                <a href="?page=<?php echo $currentPage - 1; ?>">Anterior</a>
-              </li>
-            <?php } ?>
-            <?php for ($page = 1; $page <= $totalPages; $page++) { ?>
-              <li class="<?php echo ($page == $currentPage) ? 'active' : ''; ?>">
-                <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
-              </li>
-            <?php } ?>
-            <?php if ($currentPage < $totalPages) { ?>
-              <li>
-                <a href="?page=<?php echo $currentPage + 1; ?>">Siguiente</a>
-              </li>
-            <?php } ?>
-          </ul>
-        </nav>
-
-      </div>
+    <div class="ml-auto">
+        <a class="btn btn-light" href="logout.php">Cerrar Sesión</a>
     </div>
-  </div>
+</nav>
+
+<!-- Sidebar -->
+<div id="sidebar" class="bg-light border-right position-fixed d-none d-md-block">
+    <div class="p-3">
+        <h6>Menú</h6>
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
+            <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
+            <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
+        </div>
+        <hr>
+        <p class="small text-muted mb-0">Usuario conectado: <?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
+    </div>
 </div>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+<div class="content-with-sidebar">
+    <div class="container-fluid pt-4">
+        <div class="row mb-3 align-items-center">
+            <div class="col-md-8">
+                <h4>EXPEDIENTES ARCHIVADOS</h4>
+            </div>
+            <div class="col-md-4">
+                <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
+            </div>
+        </div>
 
-<!-- Filtrar tabla por palabras clave -->
+        <div class="mb-3 d-block d-md-none">
+            <div class="btn-group btn-group-sm" role="group">
+                <a class="btn btn-primary" href="index.php">Inicio</a>
+                <a class="btn btn-secondary" href="cargardoc.php">Documentos Salidos</a> 
+                <a class="btn btn-secondary" href="cargardocr.php">Documentos Recibidos</a>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <form action="uploadzip.php" method="post" enctype="multipart/form-data" class="mb-3">
+                    <div class="form-group">
+                        <label for="zipFile">Subir expediente en formato .zip</label>
+                        <input type="file" name="zipFile" id="zipFile" class="form-control" accept=".zip">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cargar Expediente</button>
+                </form>
+
+                <?php
+                // Obtener archivos de la carpeta "exp"
+                $expDir = __DIR__ . DIRECTORY_SEPARATOR . 'exp';
+                $files = [];
+
+                if (is_dir($expDir)) {
+                    $all = scandir($expDir);
+                    foreach ($all as $f) {
+                        if ($f === '.' || $f === '..') continue;
+                        $full = $expDir . DIRECTORY_SEPARATOR . $f;
+                        if (is_file($full)) {
+                            $files[] = $f;
+                        }
+                    }
+                    // Ordenar por nombre (puedes cambiar a fecha si quieres)
+                    sort($files);
+                }
+
+                // Paginación
+                $perPage = 5;
+                $totalFiles = count($files);
+                $totalPages = $totalFiles > 0 ? ceil($totalFiles / $perPage) : 1;
+                $currentPage = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+                $currentPage = min($currentPage, $totalPages);
+                $startIndex = ($currentPage - 1) * $perPage;
+                $pageFiles = array_slice($files, $startIndex, $perPage);
+                ?>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Lista de Expedientes Archivados</h5>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                <tr>
+                                    <th width="7%">#</th>
+                                    <th width="70%">Nombre del Expediente</th>
+                                    <th width="13%">Descargar Copia</th>
+                                </tr>
+                                </thead>
+                                <tbody id="expedientes">
+                                <?php
+                                $num = $startIndex + 1;
+                                if (count($pageFiles) === 0) {
+                                    echo '<tr><td colspan="3" class="text-center">No hay expedientes.</td></tr>';
+                                } else {
+                                    foreach ($pageFiles as $f) {
+                                        $safeName = htmlspecialchars($f);
+                                        $fileUrl = 'exp/' . rawurlencode($f);
+                                        echo '<tr>';
+                                        echo '<th scope="row">' . $num++ . '</th>';
+                                        echo '<td>' . $safeName . '</td>';
+                                        echo '<td><a title="Descargar Archivo" href="' . $fileUrl . '" download="' . $safeName . '" style="color: red; font-size:18px;"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Descargar</a></td>';
+                                        echo '</tr>'; 
+                                    }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paginación -->
+                <nav aria-label="Paginación">
+                    <ul class="pagination justify-content-center">
+                        <?php if ($currentPage > 1): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $currentPage - 1; ?>">Anterior</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php for ($p = 1; $p <= $totalPages; $p++): ?>
+                            <li class="page-item <?php echo $p === $currentPage ? 'active' : ''; ?>">
+                                <a class="page-link" href="?page=<?php echo $p; ?>"><?php echo $p; ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($currentPage < $totalPages): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?php echo $currentPage + 1; ?>">Siguiente</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+
+        <footer class="text-center mt-3 mb-4">
+            <p class="small">Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © 2021</p>
+        </footer>
+    </div>
+</div>
+
+<!-- Librerías JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
 <script>
-  document.getElementById('search').addEventListener('keyup', function() {
-    var input = document.getElementById('search').value.toLowerCase();
-    var rows = document.querySelectorAll('tbody tr');
-
-    rows.forEach(function(row) {
-      var expediente = row.querySelector('td:nth-child(2)');
-      if (expediente && expediente.innerText.toLowerCase().includes(input)) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
+    // Toggle sidebar en móviles
+    document.getElementById('toggleSidebarBtn').addEventListener('click', function () {
+        var sb = document.getElementById('sidebar');
+        if (sb.classList.contains('d-none')) {
+            sb.classList.remove('d-none');
+        } else {
+            sb.classList.add('d-none');
+        }
     });
-  });
-</script>
 
-<footer>
-  <div align="center">
-    <p>Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © 2021</p> 
-  </div>
-</footer>
+    // Filtrar tabla por palabras clave (cliente)
+    document.getElementById('search').addEventListener('keyup', function () {
+        var input = this.value.toLowerCase();
+        var rows = document.querySelectorAll('#expedientes tr');
+
+        rows.forEach(function (row) {
+            var expediente = row.querySelector('td:nth-child(1)');
+            if (!expediente) {
+                // si la estructura cambia, intenta tomar la columna por índice 2
+                expediente = row.querySelector('td:nth-child(2)');
+            }
+            if (expediente && expediente.innerText.toLowerCase().includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 </body>
 </html>
