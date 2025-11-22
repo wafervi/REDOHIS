@@ -44,6 +44,8 @@ while ($row = $sel->fetch_assoc()) {
 }
 
 ?>
+
+    <!-- Inicia la estructura de toda la pagina web -->
 <!DOCTYPE html>
 <html lang="es">
 <head>

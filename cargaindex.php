@@ -5,6 +5,8 @@ if (empty($_SESSION["usuario"])) {
     exit();
 }
 ?>
+
+    <!-- Inicia la estructura de toda la pagina web -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,7 +43,7 @@ if (empty($_SESSION["usuario"])) {
     </style>
 </head>
 <body>
-
+    
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
     <a class="navbar-brand" href="#">REDOHIS</a>
