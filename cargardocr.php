@@ -255,7 +255,7 @@ while ($row = $sel->fetch_assoc()) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="exampleModalLabel" class="modal-title">Radicar nuevo documento</h5>
+                <h5 id="exampleModalLabel" class="modal-title">Recibir nuevo documento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
