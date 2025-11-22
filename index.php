@@ -1,95 +1,168 @@
 <?php
-# Este es el procedimiento PHP para hacer login. y al momento de insertar los datos correctamente, se abra la pagína de inicio.
+# Página de inicio con barra superior y barra lateral izquierda (basada en cargadoc.php)
 
-# Iniciar sesión para usar $_SESSION
 session_start();
 
-# Y ahora leer si NO hay algo llamado usuario en la sesión,
-# usando empty (vacío, ¿está vacío?)
 if (empty($_SESSION["usuario"])) {
-    # Lo redireccionamos al formulario de inicio de sesión
     header("Location: login.html");
-    # Y salimos del script
-    exit(); #en este caso, para que pueda abrir esta pagina web, se debe pasar por el proceso de autenticado.
+    exit();
+}
+
+# Helper sencillo para salida segura
+function safe_output($s) {
+    $s = (string)$s;
+    $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 ?>
-
-<!--esta es la información, que se va a mostrar en la pestaña del navegador -->
-<!DOCTYPE html> 
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<title>Menú Principal | REDOHIS</title>
-	<link rel="stylesheet" href="css/homepageskin/mascarainicio.css">
+    <meta charset="UTF-8">
+    <title>Menú Principal | REDOHIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 4.5 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+
+    <style>
+        /* Basado en el ejemplo cargardoc.php */
+        #sidebar {
+            min-height: 100vh;
+            width: 220px;
+        }
+        .content-with-sidebar {
+            margin-left: 0;
+        }
+        @media (min-width: 768px) {
+            .content-with-sidebar {
+                margin-left: 220px;
+            }
+        }
+        .brand-logo { height: 30px; width: auto; border-radius: 4px; margin-right:8px; }
+        /* Ajustes para encabezados/contenido */
+        .hero {
+            padding: 24px 0;
+        }
+    </style>
 </head>
-
-<!--desde este momento, se empieza mostrar el cuerpo de la pagina web principal -->
 <body>
-	<header>
-		<div class="wrapp">
-			<div class="logo">
-				<a href="#"><img src="logo/docec.jpg" alt="CIDOHIS"></a>
-			</div>
-			<nav>
-				<ul> <!--estos son los botones, para poder redireccionar a las tareas del sistema-->
-					<li><a href="cargardoc.php">Documentos Salidos</a></li>
-					<li><a href="cargardocr.php">Documentos Recibidos</a></li>
-					<li><a href="cargaindex.php">Expedientes Archivados</a></li>
-					<li><a href="logout.php">Cerrar Sesión</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-	
-	<section class="main">
-		<div class="wrapp">
-			<div align ="center"> <!-- aquí va centrado el titulo del sistema en la pagina de inicio -->
-				<h1>Bienvenido a REDOHIS - Repositorio de Documentos Históricos
-				</h1>
-			</div>
-			<div class="mensaje">
-				<h1>¿Qué es REDOHIS?</h1>
-			</div>
-			<div class="articulo"> <!-- aquí se muestra la información que se mostrará en la pagina de inicio -->
-				<article> 
-					<p>El Repositorio de Documentos Históricos - (REHODIS) es una herramienta para gestionar la información histórica en documentos y expedientes, de acorde a los Sistemas de Gestión de Documentos Electrónicos de Archivo – SGDEA; lo cual orienta conformar y custodiar un archivo electrónico personal e institucional en sus diferentes fases. Por ende, coadyuva a constituir el patrimonio documental electrónico y digital de las personas, empresas, entidades, regiónes o naciones.</p>
-					<br/>
-					<p>Está ligado, y hace parte del Componente de Gestión Documental (CAGESDO) del Sistema de Administración General (SAGEN) para conservar esa memoria histórica ante problemas jurídicos, legales y/o administrativos que se presenten.</p>
-					<br/>
-					<p>Este sistema, servirá para almacenar  y mostrar los documentos gestionados, producto de las actuaciones a nivel personal, laboral y/o profesional, que han terminado su tiempo de gestión y vigencia en la plataforma Evernote y OneNote de Microsoft Office 365.</p>
-					<br/>
-					<p>Con esto, se da cumplimiento la conservación de los archivos en su etapa final y semiactiva.
 
-					"La poesía es la memoria de la vida y los archivos son su lengua."-(Octavio Paz).</p>
-				</article>
-			</div>
+<!-- Barra superior -->
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
+    <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="logo/docec.jpg" alt="CIDOHIS" class="brand-logo">
+        REDOHIS
+    </a>
 
-			<aside> <!-- para este caso, se diseñó un widget, para que enlace a las plataformas donde se guardan archivos de gestión -->
-				<div class="widget">
-					<h3> Archivos de Gestión </h3>
-					<ul>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <!-- espacio para ítems si necesita -->
+        </ul>
+    </div>
 
-						<li><a href="https://www.evernote.com/client/web?login=true#?hm=true&"Target="blank">EVERNOTE - Archivo Personal</a></li> <!-- Ya se hizo lo de los enlaces a la plataforma Evernote. --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
+    <div class="ml-auto d-flex align-items-center">
 
-						<li><a href="https://www.office.com/launch/onenote?auth=2" Target="blank">ONENOTE - Archivo Laboral</a></li>   <!-- Ya se hizo lo de los enlaces a la plataforma OFFICE 365 --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
+        <a class="btn btn-light" href="logout.php">Cerrar Sesión</a>
+    </div>
+</nav>
 
-					</ul>
+<!-- Sidebar (izquierda) -->
+<div id="sidebar" class="bg-light border-right position-fixed d-none d-md-block">
+    <div class="p-3">
+        <h6>Menú</h6>
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
+            <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
+            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="index.php">Gestionar Usuario y Contraseña</a> <!--Módulo para la actualización v4.0 -->
+        </div>
+        <hr>
+        <p class="small text-muted mb-0">Usuario conectado: <?php echo htmlspecialchars($_SESSION['usuario']); ?></p>
+    </div>
+</div>
 
-					<h3> Repositorios de Software </h3>
-					<ul>
+<!-- Contenido principal -->
+<!-- El título -->
+<div class="content-with-sidebar">
+    <div class="container-fluid pt-4">
+        <div class="row mb-3 align-items-center">
+            <div class="col-md-8">
+                <h4>Bienvenido a REDOHIS - Repositorio de Documentos Históricos</h4>
+            </div>
 
-						<li><a href="https://github.com/wafervi?tab=repositories"Target="blank">GitHub</a></li> <!-- Ya se hizo lo de los enlaces a la plataforma Evernote. --> <!--Para poder abrir los enlaces en otra pagina, se utiliza ls etiqueta "<a href ="URL">Texto</a>." , que sirve para que la computadora entienda la orden y abra el enlace en la página en blanco -->
-					</ul>
-				</div>
-			</aside>
-		</div>
-    </section>
-	
-	<footer>
-		<div class="wrapp">
-			<p>Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © 2021</p> <!--esto se muestra en el parte inferior de la pagina web-->
-		</div>
-	</footer>
+<!-- El carretazo -->
+        </div>
 
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h3>¿Qué es REDOHIS?</h3>
+                        <article>
+                            <p>El Repositorio de Documentos Históricos - (REHODIS) es una herramienta para gestionar la información histórica en documentos y expedientes, de acorde a los Sistemas de Gestión de Documentos Electrónicos de Archivo – SGDEA; lo cual orienta conformar y custodiar un archivo electrónico personal e institucional en sus diferentes fases. Por ende, coadyuva a constituir el patrimonio documental electrónico y digital de las personas, empresas, entidades, regiónes o naciones.</p>
+
+                            <p>Está ligado, y hace parte del Componente de Gestión Documental (CAGESDO) del Sistema de Administración General (SAGEN) para conservar esa memoria histórica ante problemas jurídicos, legales y/o administrativos que se presenten.</p>
+
+                            <p>Este sistema, servirá para almacenar  y mostrar los documentos gestionados, producto de las actuaciones a nivel personal, laboral y/o profesional, que han terminado su tiempo de gestión y vigencia en la plataforma Evernote y OneNote de Microsoft Office 365.</p>
+
+                            <p>Con esto, se da cumplimiento la conservación de los archivos en su etapa final y semiactiva.</p>
+
+                            <p>"La poesía es la memoria de la vida y los archivos son su lengua." - Octavio Paz</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+<!-- Cuadro de información -->
+            <aside class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5>Archivos de Gestión</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.evernote.com/client/web?login=true#?hm=true&" target="_blank">EVERNOTE - Archivo Personal</a></li>
+                            <li><a href="https://www.office.com/launch/onenote?auth=2" target="_blank">ONENOTE - Archivo Laboral</a></li>
+                        </ul>
+                        <hr>
+                        <h6>Repositorios de Software</h6>
+                        <ul class="list-unstyled">
+                            <li><a href="https://github.com/wafervi?tab=repositories" target="_blank">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="text-center mt-3 mb-4">
+            <p class="small">Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © <?php echo date('Y'); ?></p>
+        </footer>
+    </div>
+</div>
+
+<!-- Librerías JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+<script>
+    // Toggle sidebar en móviles (misma lógica que en cargadoc2.php)
+    document.getElementById('toggleSidebarBtn').addEventListener('click', function () {
+        var sb = document.getElementById('sidebar');
+        if (sb.classList.contains('d-none')) {
+            sb.classList.remove('d-none');
+        } else {
+            sb.classList.add('d-none');
+        }
+    });
+</script>
 </body>
 </html>
