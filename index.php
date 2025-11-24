@@ -1,5 +1,5 @@
 <?php
-# Página de inicio con barra superior y barra lateral izquierda (basada en cargadoc.php)
+# Inicio de sesión
 
 session_start();
 
@@ -8,7 +8,7 @@ if (empty($_SESSION["usuario"])) {
     exit();
 }
 
-# Helper sencillo para salida segura
+# Helper sencillo para salida segura con la función safe_output
 function safe_output($s) {
     $s = (string)$s;
     $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -22,13 +22,13 @@ function safe_output($s) {
     <title>Menú Principal | REDOHIS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap 4.5 -->
+    <!-- Ejecución de la librería Bootstrap 4.5 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           crossorigin="anonymous">
 
     <style>
-        /* Basado en el ejemplo cargardoc.php */
+        /* Diseño del slidebar en CSS */
         #sidebar {
             min-height: 100vh;
             width: 220px;
@@ -50,17 +50,17 @@ function safe_output($s) {
 </head>
 <body>
 
-<!-- Barra superior -->
+<!-- Diseño de la barra superior (en color azul) -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
     <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="logo/docec.jpg" alt="CIDOHIS" class="brand-logo">
-        REDOHIS
+        REDOHIS  <!-- Título de aplicativo en la parte superior izquierda -->
     </a>
 
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-            <!-- espacio para ítems si necesita -->
+            <!-- Espacio para ítems si es necesario, mas adelante en futuras actualizaciones -->
         </ul>
     </div>
 
@@ -70,7 +70,7 @@ function safe_output($s) {
     </div>
 </nav>
 
-<!-- Sidebar (izquierda) -->
+<!-- Sidebar de la  izquierda donde se muestra los botones en la página, para acceder a los diferentes módulos -->
 <div id="sidebar" class="bg-light border-right position-fixed d-none d-md-block">
     <div class="p-3">
         <h6>Menú</h6>
@@ -85,8 +85,8 @@ function safe_output($s) {
     </div>
 </div>
 
-<!-- Contenido principal -->
-<!-- El título -->
+<!-- Acá se muestra el ontenido de la página principal (index.php) -->
+<!-- El título de bienvenida -->
 <div class="content-with-sidebar">
     <div class="container-fluid pt-4">
         <div class="row mb-3 align-items-center">
@@ -94,7 +94,7 @@ function safe_output($s) {
                 <h4>Bienvenido a REDOHIS - Repositorio de Documentos Históricos</h4>
             </div>
 
-<!-- El carretazo -->
+<!-- Viene el carretazo -->
         </div>
 
         <div class="row">
@@ -117,7 +117,7 @@ function safe_output($s) {
                 </div>
             </div>
 
-<!-- Cuadro de información -->
+<!-- Cuadro de información al lado del contenido -->
             <aside class="col-md-4">
                 <div class="card mb-3">
                     <div class="card-body">
@@ -136,15 +136,15 @@ function safe_output($s) {
             </aside>
         </div>
 
-<!-- etiqueta del pie de página con copyright -->
+<!-- Etiqueta del pie de página con copyright -->
 <footer class="text-center mt-3 mb-4">
     <p class="small"> Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN / CAGESDO © <?php echo date('Y'); ?> -  
         <?php
-        // Repositorio GitHub de Wagner Fernández
+        // Acceso al repositorio GitHub de Wagner Fernández
         $repo = "wafervi/REDOHIS";
         $url = "https://api.github.com/repos/$repo/releases/latest";
 
-        // Inicializa cURL
+        // Inicializa cURL o transferencia de datos
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -152,10 +152,10 @@ function safe_output($s) {
         $response = curl_exec($ch);
         curl_close($ch);
 
-        // Decodifica la respuesta
+        // Decodificación de esa la respuesta
         $data = json_decode($response, true);
 
-        // Muestra la versión (tag_name)
+        // Mostrar la versión actual (tag_name) del repositorio GitHub
         echo isset($data['tag_name']) ? htmlspecialchars($data['tag_name']) : 'No disponible';
         ?>
     </p>
@@ -163,7 +163,7 @@ function safe_output($s) {
     </div>
 </div>
 
-<!-- Librerías JS -->
+<!-- Librerías JS para el funcionamiento de modales, formularios efectos con Boostrap  -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -175,7 +175,7 @@ function safe_output($s) {
         crossorigin="anonymous"></script>
 
 <script>
-    // Toggle sidebar en móviles (misma lógica que en cargadoc2.php)
+    // Toggle sidebar en móviles, mejor vista en estos dispositivos
     document.getElementById('toggleSidebarBtn').addEventListener('click', function () {
         var sb = document.getElementById('sidebar');
         if (sb.classList.contains('d-none')) {
