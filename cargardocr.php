@@ -244,9 +244,30 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-        <footer class="text-center mt-3 mb-4">
-            <p class="small">Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN - CAGESDO - © <?php echo date('Y'); ?></p>
-        </footer>
+<!-- etiqueta del pie de página con copyright -->
+<footer class="text-center mt-3 mb-4">
+    <p class="small"> Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN / CAGESDO © <?php echo date('Y'); ?> -  
+        <?php
+        // Repositorio GitHub de Wagner Fernández
+        $repo = "wafervi/REDOHIS";
+        $url = "https://api.github.com/repos/$repo/releases/latest";
+
+        // Inicializa cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'wafervi'); // Mi usuario GitHub
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // Decodifica la respuesta
+        $data = json_decode($response, true);
+
+        // Muestra la versión (tag_name)
+        echo isset($data['tag_name']) ? htmlspecialchars($data['tag_name']) : 'No disponible';
+        ?>
+    </p>
+</footer>
     </div>
 </div>
 
