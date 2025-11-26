@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Mostrar un popup con JavaScript si el archivo no es .zip
         echo "<script type='text/javascript'>
                 alert('Cargue un expediente en formato .zip.');
-                window.location.href = 'cargaindex.php'; // Redirigir de nuevo al formulario
+                window.location.href = 'cargarexp.php'; // Redirigir de nuevo al formulario
               </script>";
         exit(); // Detener la ejecución del script para evitar más procesamiento
     } else {
@@ -17,13 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (move_uploaded_file($_FILES["zipFile"]["tmp_name"], $target_file)) {
             echo "<script type='text/javascript'>
                     alert('El expediente ". htmlspecialchars(basename($_FILES["zipFile"]["name"])) . " ha sido cargado correctamente.');
-                    window.location.href = 'cargaindex.php'; // Redirigir después de cargar correctamente
+                    window.location.href = 'cargarexp.php'; // Redirigir después de cargar correctamente
                   </script>";
             exit(); // Detener la ejecución
         } else {
             echo "<script type='text/javascript'>
                     alert('Hubo un error al cargar su archivo.');
-                    window.location.href = 'cargaindex.php'; // Redirigir si ocurre un error
+                    window.location.href = 'cargarexp.php'; // Redirigir si ocurre un error
                   </script>";
             exit();
         }

@@ -128,8 +128,8 @@ while ($row = $sel->fetch_assoc()) {
             <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">
                 Recibir Nuevo Documento
             </button>
-            <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
-            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="cargardocs.php">Documentos Salidos</a>
+            <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
             <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
 
         </div>
@@ -165,7 +165,7 @@ while ($row = $sel->fetch_assoc()) {
             <div class="btn-group btn-group-sm" role="group" aria-label="Menú móvil">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar</button>
                 <a class="btn btn-secondary" href="index.php">Inicio</a>
-                <a class="btn btn-secondary" href="cargaindex.php">Archivados</a>
+                <a class="btn btn-secondary" href="cargarexp.php">Archivados</a>
             </div>
         </div>
 
