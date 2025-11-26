@@ -109,7 +109,7 @@ while ($row = $sel->fetch_assoc()) {
                 Radicar Nuevo Documento
             </button>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
-            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
             <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
 
 
