@@ -129,7 +129,7 @@ while ($row = $sel->fetch_assoc()) {
                 Recibir Nuevo Documento
             </button>
             <a class="list-group-item list-group-item-action" href="cargardocs.php">Documentos Salidos</a>
-            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
             <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
 
         </div>
