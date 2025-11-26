@@ -165,7 +165,7 @@ while ($row = $sel->fetch_assoc()) {
             <div class="btn-group btn-group-sm" role="group" aria-label="Menú móvil">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar</button>
                 <a class="btn btn-secondary" href="index.php">Inicio</a>
-                <a class="btn btn-secondary" href="cargaindex.php">Archivados</a>
+                <a class="btn btn-secondary" href="cargarexp.php">Archivados</a>
             </div>
         </div>
 
