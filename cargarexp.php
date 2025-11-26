@@ -58,7 +58,7 @@ if (empty($_SESSION["usuario"])) {
     <div class="p-3">
         <h6>Menú</h6>
         <div class="list-group">
-            <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
+            <a class="list-group-item list-group-item-action" href="cargardocs.php">Documentos Salidos</a>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
             <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
         </div>
@@ -135,7 +135,7 @@ if (empty($_SESSION["usuario"])) {
                                 <tr>
                                     <th width="7%">#</th>
                                     <th width="70%">Nombre del Expediente</th>
-                                    <th width="13%">Descargar Copia</th>
+                                    <th width="13%" class="text-center">Descargar copia</th>
                                 </tr>
                                 </thead>
                                 <tbody id="expedientes">
@@ -148,10 +148,11 @@ if (empty($_SESSION["usuario"])) {
                                         $safeName = htmlspecialchars($f);
                                         $fileUrl = 'exp/' . rawurlencode($f);
                                         echo '<tr>';
-                                        echo '<th scope="row">' . $num++ . '</th>';
-                                        echo '<td>' . $safeName . '</td>';
-                                        echo '<td><a title="Descargar Archivo" href="' . $fileUrl . '" download="' . $safeName . '" style="color: red; font-size:18px;"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Descargar</a></td>';
-                                        echo '</tr>'; 
+                                        echo '<th scope="row" class="align-middle">' . $num++ . '</th>';
+                                        echo '<td class="align-middle">' . $safeName . '</td>';
+                                        // Flecha centrada y en color rojo usando clases de Bootstrap
+                                        echo '<td class="text-center align-middle"><a title="Descargar Archivo" href="' . $fileUrl . '" download="' . $safeName . '" aria-label="Descargar ' . $safeName . '"><span class="text-danger" style="font-size:18px;" role="img" aria-hidden="true">&#x2B07;</span></a></td>';
+                                        echo '</tr>';
                                     }
                                 }
                                 ?>

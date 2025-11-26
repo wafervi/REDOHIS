@@ -75,9 +75,9 @@ function safe_output($s) {
     <div class="p-3">
         <h6>Menú</h6>
         <div class="list-group">
-            <a class="list-group-item list-group-item-action" href="cargardoc.php">Documentos Salidos</a>
+            <a class="list-group-item list-group-item-action" href="cargardocs.php">Documentos Salidos</a>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
-            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
             <a class="list-group-item list-group-item-action" href="index.php">Gestionar Usuario y Contraseña</a> <!--Módulo para la actualización v4.0 -->
         </div>
         <hr>

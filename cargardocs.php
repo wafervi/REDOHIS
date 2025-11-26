@@ -109,7 +109,7 @@ while ($row = $sel->fetch_assoc()) {
                 Radicar Nuevo Documento
             </button>
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
-            <a class="list-group-item list-group-item-action" href="cargaindex.php">Expedientes Archivados</a>
+            <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
             <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
 
 
@@ -146,7 +146,7 @@ while ($row = $sel->fetch_assoc()) {
             <div class="btn-group btn-group-sm" role="group" aria-label="Menú móvil">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar</button>
                 <a class="btn btn-secondary" href="index.php">Inicio</a>
-                <a class="btn btn-secondary" href="cargaindex.php">Archivados</a>
+                <a class="btn btn-secondary" href="cargarexp.php">Archivados</a>
             </div>
         </div>
 
@@ -377,7 +377,7 @@ while ($row = $sel->fetch_assoc()) {
                 }
             }
         };
-        xhttp.open("POST", "upload.php", true);
+        xhttp.open("POST", "uploadfiles.php", true);
         xhttp.send(data);
         frm.reset();
     }
