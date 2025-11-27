@@ -1,20 +1,17 @@
 <?php
-# Inicio de sesión
+
 session_start();
 
-# Y ahora leer si NO hay algo llamado usuario en la sesión,
-# usando empty (vacío, ¿está vacío?)
-
 if (empty($_SESSION["usuario"])) {
-    # Lo redireccionamos al formulario de inicio de sesión
+    
     header("Location: login.html");
-    # Y salimos del script
+    
     exit();
 }
-?> <!-- Lo anterior, el procedimiento de inicio de seión-->
+?> <!-- Lo anterior, es el procedimiento de inicio de seión-->
 
 <!DOCTYPE html> 
-<head> <!-- Aquí empieza el encabezado del modulo para radicar documentos-->
+<head> 
 	<meta charset="UTF-8">
 	<title>Radicar y visualizar documentos salidos | REDOHIS</title> <!--Titulo que mostrará en la pestaña del navegador web-->
 </head>
@@ -29,13 +26,12 @@ if (empty($_SESSION["usuario"])) {
 
 include('conexion.php');
 
-# Helper: decodifica entidades HTML (si existen en la BD) y luego escapa para salida segura
 function safe_output($s) {
-    // Forzamos a string por si viene null
+ 
     $s = (string)$s;
-    // Primero decodificamos entidades HTML (&aacute; -> á). Esto corrige textos que se guardaron como entidades.
+    
     $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    // Luego escapamos con htmlspecialchars para prevenir XSS y mantener caracteres UTF-8
+   
     return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
@@ -43,19 +39,19 @@ function safe_output($s) {
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $searchEsc = $con->real_escape_string($search);
 
-# Paginación
+# Se programa para que la paginación se muestre de a 5 registros en el módulo
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = max($page, 1);
 $offset = ($page - 1) * $limit;
 
-# Contar total de registros (con filtro)
+# Contar total de registros (con filtro al consultar en la DB)
 $totalQuery = $con->query("SELECT COUNT(*) as total FROM filer WHERE title LIKE '%$searchEsc%' OR description LIKE '%$searchEsc%' OR sender LIKE '%$searchEsc%' OR adresse LIKE '%$searchEsc%'");
 $totalRow = $totalQuery->fetch_assoc();
 $totalRecords = (int)$totalRow['total'];
 $totalPages = $totalRecords > 0 ? ceil($totalRecords / $limit) : 1;
 
-# Obtener registros para la página actual
+# Obtener registros para la página actual al momento de hacer filtrado en la barra de busqueda
 $sel = $con->query("SELECT * FROM filer WHERE title LIKE '%$searchEsc%' OR description LIKE '%$searchEsc%' OR sender LIKE '%$searchEsc%' OR adresse LIKE '%$searchEsc%' ORDER BY id DESC LIMIT $limit OFFSET $offset");
 
 $res = [];
@@ -65,7 +61,7 @@ while ($row = $sel->fetch_assoc()) {
 
 ?>
 
-    <!-- Inicia la estructura de toda la pagina web -->
+<!-- Inicio de la estructura de toda la pagina web -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -84,7 +80,7 @@ while ($row = $sel->fetch_assoc()) {
             min-height: 100vh;
             width: 220px;
         }
-        /* Ajuste cuando el sidebar esté oculto en móviles */
+        /* Ajuste cuando el sidebar esté oculto en visualización en dispositivos móviles */
         .content-with-sidebar {
             margin-left: 0;
         }
@@ -106,13 +102,13 @@ while ($row = $sel->fetch_assoc()) {
 </head>
 <body>
 
-<!-- Barra superior -->
+<!-- Barra superior  del módulo-->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
     <a class="navbar-brand" href="#">REDOHIS</a>
 
     <div class="collapse navbar-collapse">
-        <!-- Espacio para otros elementos si es necesario -->
+        <!-- Espacio para otros elementos si es necesario en futuras actualizaciones -->
     </div>
 
     <div class="ml-auto">
@@ -120,7 +116,7 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </nav>
 
-<!-- Sidebar (izquierda) -->
+<!-- Barra lateral izquierda -->
 <div id="sidebar" class="bg-light border-right position-fixed d-none d-md-block">
     <div class="p-3">
         <h6>Menú</h6>
@@ -131,14 +127,13 @@ while ($row = $sel->fetch_assoc()) {
             <a class="list-group-item list-group-item-action" href="cargardocs.php">Documentos Salidos</a>
             <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
             <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
-
         </div>
         <hr>
         <p class="small text-muted mb-0">Usuario conectado: <?php echo safe_output($_SESSION['usuario']); ?></p>
     </div>
 </div>
 
-<!-- Contenido principal -->
+<!-- Contenido que se mostrará en la página -->
 <div class="content-with-sidebar">
     <div class="container-fluid pt-4">
         <div class="row mb-3 align-items-center">
@@ -146,7 +141,7 @@ while ($row = $sel->fetch_assoc()) {
                 <h4>RADICAR Y VISUALIZAR DOCUMENTOS RECIBIDOS</h4>
             </div>
 
-            <!-- Buscador -->
+            <!-- Barra para Búsqueda de registros -->
             <div class="col-md-4">
                 <form method="GET" action="">
                     <div class="input-group">
@@ -169,7 +164,7 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Tabla de resultados -->
+        <!-- Tabla donde se muestran los datos de los documentos registrados -->
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -196,7 +191,6 @@ while ($row = $sel->fetch_assoc()) {
                         <?php else: ?>
                             <?php foreach ($res as $val): ?>
                                 <tr>
-
                                     <td><?php echo safe_output($val['pin']); ?></td>
                                     <td><?php echo safe_output($val['date']); ?></td>
                                     <td><?php echo safe_output($val['pages']); ?></td>
@@ -218,7 +212,7 @@ while ($row = $sel->fetch_assoc()) {
                     </table>
                 </div>
 
-                <!-- Paginación -->
+                <!-- Paginación de la web -->
                 <nav aria-label="Paginación">
                     <ul class="pagination justify-content-center mb-0">
                         <?php if ($page > 1): ?>
@@ -240,30 +234,29 @@ while ($row = $sel->fetch_assoc()) {
                         <?php endif; ?>
                     </ul>
                 </nav>
-
             </div>
         </div>
 
-<!-- etiqueta del pie de página con copyright -->
+<!-- etiqueta del pie de página con el copyright y versionamiento del aplicativo -->
 <footer class="text-center mt-3 mb-4">
     <p class="small"> Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN / CAGESDO © <?php echo date('Y'); ?> -  
         <?php
-        // Repositorio GitHub de Wagner Fernández
+        // Link al repositorio GitHub de Wagner Fernández
         $repo = "wafervi/REDOHIS";
         $url = "https://api.github.com/repos/$repo/releases/latest";
 
-        // Inicializa cURL
+        // Inicio cURL - (Transferencia de Archivos)
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'wafervi'); // Mi usuario GitHub
+        curl_setopt($ch, CURLOPT_USERAGENT, 'wafervi'); // Usuario GitHub
         $response = curl_exec($ch);
         curl_close($ch);
 
-        // Decodifica la respuesta
+        // Decodificación de esa petición
         $data = json_decode($response, true);
 
-        // Muestra la versión (tag_name)
+        // Muestra la versión (tag_name) que tenga el repositorio GitHub
         echo isset($data['tag_name']) ? htmlspecialchars($data['tag_name']) : 'No disponible';
         ?>
     </p>
@@ -271,7 +264,7 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </div>
 
-<!-- Modal para radicar nuevo documento -->
+<!-- Modal para radicar nuevo documento recibibido -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -321,7 +314,7 @@ while ($row = $sel->fetch_assoc()) {
 
                     <div class="form-group">
                         <label for="pin">Radicado del documento</label>
-                        <input type="text" class="form-control" id="pin" name="pin" value="<?php echo rand(); ?>">
+                        <input type="text" class="form-control" id="pin" name="pin" value="<?php echo rand(); ?>"> <!-- método echo rand(); para numeros aleatorios -->
                     </div>
 
                     <div class="form-group">
@@ -339,7 +332,7 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </div>
 
-<!-- Modal para visualizar PDF -->
+<!-- Modal para visualizar PDF del documento radicado -->
 <div class="modal fade" id="modalPdf" tabindex="-1" aria-labelledby="modalPdfLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
@@ -369,7 +362,7 @@ while ($row = $sel->fetch_assoc()) {
 
 
 <script>
-    // Toggle sidebar en móviles
+    // Toggle sidebar para visualización en dispositivos móviles
     document.getElementById('toggleSidebarBtn').addEventListener('click', function () {
         var sb = document.getElementById('sidebar');
         if (sb.classList.contains('d-none')) {
@@ -378,7 +371,7 @@ while ($row = $sel->fetch_assoc()) {
             sb.classList.add('d-none');
         }
     });
-
+    // alerta donde se informa que el archivo ha sido exitosamente cargado
     function onSubmitForm() {
         var frm = document.getElementById('form1');
         var data = new FormData(frm);
@@ -400,14 +393,12 @@ while ($row = $sel->fetch_assoc()) {
 
 
     function openModelPDF(url) {
-        // Construir la URL absoluta basándonos en el host actual
+        // Construir la URL absoluta basándose en el host actual
         var hostRoot = '<?php echo (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on" ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . rtrim(dirname($_SERVER["SCRIPT_NAME"]), "/\\\\") . "/"; ?>';
         // url viene codificada con rawurlencode desde PHP para evitar problemas con espacios/caracteres
         $('#iframePDF').attr('src', hostRoot + decodeURIComponent(url));
         $('#modalPdf').modal('show');
     }
-
-
 
 </script>
 </body>
