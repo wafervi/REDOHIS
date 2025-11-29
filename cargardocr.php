@@ -104,8 +104,10 @@ while ($row = $sel->fetch_assoc()) {
 
 <!-- Barra superior  del módulo-->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
-    <a class="navbar-brand" href="#">REDOHIS</a>
+    <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="logo/docec.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
+        REDOHIS
+    </a>
 
     <div class="collapse navbar-collapse">
         <!-- Espacio para otros elementos si es necesario en futuras actualizaciones -->
