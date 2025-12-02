@@ -13,7 +13,7 @@ if (empty($_SESSION["usuario"])) {
 <!DOCTYPE html> 
 <head> 
 	<meta charset="UTF-8">
-	<title>Radicar y visualizar documentos salidos | REDOHIS</title> <!--Titulo que mostrará en la pestaña del navegador web-->
+	<title>Radicar y visualizar documentos recibidos| REDOHIS</title> <!--Titulo que mostrará en la pestaña del navegador web-->
 </head>
 
 <?php
@@ -61,7 +61,7 @@ while ($row = $sel->fetch_assoc()) {
 
 ?>
 
-<!-- Inicio de la estructura de toda la pagina web -->
+<!-- Inicia la estructura de toda la pagina web -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -102,7 +102,7 @@ while ($row = $sel->fetch_assoc()) {
 </head>
 <body>
 
-<!-- Barra superior  del módulo-->
+<!-- Barra superior  del módulo que va en color azul -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="logo/docec.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
@@ -118,7 +118,7 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </nav>
 
-<!-- Barra lateral izquierda -->
+<!-- Sidebar barra lateral (izquierda) con respectivos botones y accesos -->
 <div id="sidebar" class="bg-light border-right position-fixed d-none d-md-block">
     <div class="p-3">
         <h6>Menú</h6>
@@ -147,7 +147,7 @@ while ($row = $sel->fetch_assoc()) {
             <div class="col-md-4">
                 <form method="GET" action="">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Buscar documentos"
+                        <input type="text" name="search" class="form-control" placeholder="Buscar en documentos recibidos"
                                value="<?php echo htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Buscar</button>
@@ -157,7 +157,7 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Botones (visibles en pantallas pequeñas o por conveniencia) -->
+        <!-- Botones (visibles en pantallas pequeñas o por conveniencia) en el caso de móviles -->
         <div class="d-block d-md-none mb-3">
             <div class="btn-group btn-group-sm" role="group" aria-label="Menú móvil">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar</button>
@@ -166,7 +166,7 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Tabla donde se muestran los datos de los documentos registrados -->
+        <!-- Tabla que muestra los datos consultados en la DB -->
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -362,7 +362,7 @@ while ($row = $sel->fetch_assoc()) {
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 
-
+<!-- Acceso a funciones para cargar archivos PDF a la carpeta 'filer' del proyecto -->
 <script>
     // Toggle sidebar para visualización en dispositivos móviles
     document.getElementById('toggleSidebarBtn').addEventListener('click', function () {
@@ -373,7 +373,7 @@ while ($row = $sel->fetch_assoc()) {
             sb.classList.add('d-none');
         }
     });
-    // alerta donde se informa que el archivo ha sido exitosamente cargado
+    
     function onSubmitForm() {
         var frm = document.getElementById('form1');
         var data = new FormData(frm);
@@ -393,7 +393,6 @@ while ($row = $sel->fetch_assoc()) {
         xhttp.send(data);
     }
 
-
     function openModelPDF(url) {
         // Construir la URL absoluta basándose en el host actual
         var hostRoot = '<?php echo (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on" ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . rtrim(dirname($_SERVER["SCRIPT_NAME"]), "/\\\\") . "/"; ?>';
@@ -401,7 +400,6 @@ while ($row = $sel->fetch_assoc()) {
         $('#iframePDF').attr('src', hostRoot + decodeURIComponent(url));
         $('#modalPdf').modal('show');
     }
-
 </script>
 </body>
 </html>

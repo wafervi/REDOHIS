@@ -1,6 +1,5 @@
 <?php
 
-# Inicio de sesión
 session_start();
 
 if (empty($_SESSION["usuario"])) {
@@ -10,21 +9,21 @@ if (empty($_SESSION["usuario"])) {
 
 include('conexion.php');
 
-# Helper: decodifica entidades HTML (si existen en la BD) y luego escapa para salida segura
-function safe_output($s) {
-    // Forzamos a string por si viene null
-    $s = (string)$s;
-    // Primero decodificamos entidades HTML (&aacute; -> á). Esto corrige textos que se guardaron como entidades.
-    $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    // Luego escapamos con htmlspecialchars para prevenir XSS y mantener caracteres UTF-8
-    return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-}
 
-# Manejar búsqueda
+function safe_output($s) {
+   
+    $s = (string)$s;
+    
+    $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');  //  mantener caracteres UTF-8
+   
+    return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+} // Lo anterior, es el procedimiento, para conectarse con la Base de Datos 'uploadfile'
+
+# Cómo se manejará la búsqueda al insertar datos en la barra diseñada para tal fin
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $searchEsc = $con->real_escape_string($search);
 
-# Paginación
+# Paginación es decir, cómo se mostrará la pagina web, que en este caso, de a 5 registros.
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = max($page, 1);
@@ -53,7 +52,7 @@ while ($row = $sel->fetch_assoc()) {
     <title>Radicar y visualizar documentos salidos | REDOHIS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap 4.5 -->
+    <!-- Librería de Bootstrap 4.5 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
           crossorigin="anonymous">
@@ -86,15 +85,15 @@ while ($row = $sel->fetch_assoc()) {
 </head>
 <body>
 
-<!-- Barra superior -->
+<!-- Barra superior del módulo que va en color azul -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <a class="navbar-brand d-flex align-items-center" href="#">
         <img src="logo/docec.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
-        REDOHIS
+        REDOHIS <!-- Se añade el logo seleccionado para el aplicativo -->
     </a>
 
     <div class="collapse navbar-collapse">
-        <!-- Espacio para otros elementos si es necesario -->
+        <!-- Espacio para otros elementos si es necesario, que puede servir para futuras actualizaciones -->
     </div>
 
     <div class="ml-auto">
@@ -102,7 +101,7 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </nav>
 
-<!-- Sidebar (izquierda) -->
+<!-- Sidebar barra lateral (izquierda) con respectivos botones y accesos -->
 <div id="sidebar" class="bg-light border-right position-fixed d-none d-md-block">
     <div class="p-3">
         <h6>Menú</h6>
@@ -113,15 +112,13 @@ while ($row = $sel->fetch_assoc()) {
             <a class="list-group-item list-group-item-action" href="cargardocr.php">Documentos Recibidos</a>
             <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
             <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
-
-
         </div>
         <hr>
-        <p class="small text-muted mb-0">Usuario conectado: <?php echo safe_output($_SESSION['usuario']); ?></p>
+        <p class="small text-muted mb-0">Usuario conectado: <?php echo safe_output($_SESSION['usuario']); ?></p> <!-- El usuario que se conecta a la BD -->
     </div>
 </div>
 
-<!-- Contenido principal -->
+<!-- La página con su respectivo contenido -->
 <div class="content-with-sidebar">
     <div class="container-fluid pt-4">
         <div class="row mb-3 align-items-center">
@@ -129,11 +126,11 @@ while ($row = $sel->fetch_assoc()) {
                 <h4>RADICAR Y VISUALIZAR DOCUMENTOS SALIDOS</h4>
             </div>
 
-            <!-- Buscador -->
+            <!-- Barra para Búsqueda de registros -->
             <div class="col-md-4">
                 <form method="GET" action="">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Buscar documentos"
+                        <input type="text" name="search" class="form-control" placeholder="Buscar en documentos salidos"
                                value="<?php echo htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Buscar</button>
@@ -143,7 +140,7 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Botones (visibles en pantallas pequeñas o por conveniencia) -->
+        <!-- Botones (visibles en pantallas pequeñas o por conveniencia) en el caso de móviles-->
         <div class="d-block d-md-none mb-3">
             <div class="btn-group btn-group-sm" role="group" aria-label="Menú móvil">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar</button>
@@ -152,7 +149,7 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Tabla de resultados -->
+        <!-- Tabla que muestra los datos consultados en la DB -->
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -176,10 +173,9 @@ while ($row = $sel->fetch_assoc()) {
                             <tr>
                                 <td colspan="10" class="text-center">No se encontraron registros.</td>
                             </tr>
-                        <?php else: ?>
+                        <?php else: ?> 
                             <?php foreach ($res as $val): ?>
                                 <tr>
-
                                     <td><?php echo safe_output($val['pin']); ?></td>
                                     <td><?php echo safe_output($val['date']); ?></td>
                                     <td><?php echo safe_output($val['pages']); ?></td>
@@ -201,7 +197,7 @@ while ($row = $sel->fetch_assoc()) {
                     </table>
                 </div>
 
-                <!-- Paginación -->
+                <!-- Paginación de la web -->
                 <nav aria-label="Paginación">
                     <ul class="pagination justify-content-center mb-0">
                         <?php if ($page > 1): ?>
@@ -227,7 +223,7 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-<!-- etiqueta del pie de página con copyright -->
+<!-- etiqueta del pie de página con el copyright y versionamiento del aplicativo -->
 <footer class="text-center mt-3 mb-4">
     <p class="small"> Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN / CAGESDO © 2022 - <?php echo date('Y'); ?> -  
         <?php
@@ -235,18 +231,18 @@ while ($row = $sel->fetch_assoc()) {
         $repo = "wafervi/REDOHIS";
         $url = "https://api.github.com/repos/$repo/releases/latest";
 
-        // Inicializa cURL
+        // Inicio cURL - (Transferencia de Archivos)
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'wafervi'); // Mi usuario GitHub
+        curl_setopt($ch, CURLOPT_USERAGENT, 'wafervi'); // Usuario GitHub
         $response = curl_exec($ch);
         curl_close($ch);
 
-        // Decodifica la respuesta
+        // Decodificación de esa petición
         $data = json_decode($response, true);
 
-        // Muestra la versión (tag_name)
+        // Muestra la versión (tag_name) que tenga el repositorio GitHub
         echo isset($data['tag_name']) ? htmlspecialchars($data['tag_name']) : 'No disponible';
         ?>
     </p>
@@ -254,7 +250,7 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </div>
 
-<!-- Modal para radicar nuevo documento -->
+<!-- Modal para radicar nuevo documento salido -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -322,7 +318,7 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </div>
 
-<!-- Modal para visualizar PDF -->
+<!-- Modal para visualizar PDF del documento radicado -->
 <div class="modal fade" id="modalPdf" tabindex="-1" aria-labelledby="modalPdfLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
@@ -351,8 +347,9 @@ while ($row = $sel->fetch_assoc()) {
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 
+<!-- Acceso a funciones para cargar archivos PDF a la carpeta 'filer' del proyecto -->
 <script>
-    // Toggle sidebar en móviles
+    // Toggle sidebar para visualización en dispositivos móviles
     document.getElementById('toggleSidebarBtn').addEventListener('click', function () {
         var sb = document.getElementById('sidebar');
         if (sb.classList.contains('d-none')) {
@@ -385,7 +382,7 @@ while ($row = $sel->fetch_assoc()) {
     }
 
     function openModelPDF(url) {
-        // Construir la URL absoluta basándonos en el host actual
+        // Construir la URL absoluta basándose en el host actual
         var hostRoot = '<?php echo (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on" ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . rtrim(dirname($_SERVER["SCRIPT_NAME"]), "/\\\\") . "/"; ?>';
         // url viene codificada con rawurlencode desde PHP para evitar problemas con espacios/caracteres
         $('#iframePDF').attr('src', hostRoot + decodeURIComponent(url));
