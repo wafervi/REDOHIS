@@ -11,11 +11,11 @@ include('conexion.php');
 
 
 function safe_output($s) {
-   
+
     $s = (string)$s;
     
     $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');  //  mantener caracteres UTF-8
-   
+
     return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 } // Lo anterior, es el procedimiento, para conectarse con la Base de Datos 'uploadfile'
 
@@ -54,8 +54,8 @@ while ($row = $sel->fetch_assoc()) {
 
     <!-- Librería de Bootstrap 4.5 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-          crossorigin="anonymous">
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
 
     <style>
         /* Estilos para sidebar */
@@ -88,7 +88,7 @@ while ($row = $sel->fetch_assoc()) {
 <!-- Barra superior del módulo que va en color azul -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
+        <img src="assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
         REDOHIS <!-- Se añade el logo seleccionado para el aplicativo -->
     </a>
 
