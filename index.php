@@ -54,7 +54,7 @@ function safe_output($s) {
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
     <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="css/loginskin/redohis_icon.png" alt="CIDOHIS" class="brand-logo">
+        <img src="images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo">
         REDOHIS  <!-- Título de aplicativo en la parte superior izquierda -->
     </a>
 
