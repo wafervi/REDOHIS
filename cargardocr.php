@@ -105,7 +105,7 @@ while ($row = $sel->fetch_assoc()) {
 <!-- Barra superior  del módulo que va en color azul -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
+        <img src="assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
         REDOHIS
     </a>
 
