@@ -46,7 +46,7 @@ if (empty($_SESSION["usuario"])) {
     
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="css/loginskin/redohis_icon.png" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
+        <img src="images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
         REDOHIS
     </a>
 
