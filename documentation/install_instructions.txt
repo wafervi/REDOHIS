@@ -17,4 +17,4 @@ PASSWORD: admin
 
 - DATABASE TEST NAME -
 
-uploadfile2
+NAME: uploadfile2
