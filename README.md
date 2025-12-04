@@ -23,5 +23,5 @@ Document Management System
 ### **Framework** 
 
 - VSCode
-- Linux
+- Git
 - DBEAVER
