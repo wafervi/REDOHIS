@@ -27,11 +27,11 @@ if (empty($_SESSION["usuario"])) {
 include('conexion.php');
 
 function safe_output($s) {
- 
+
     $s = (string)$s;
     
     $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-   
+
     return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
