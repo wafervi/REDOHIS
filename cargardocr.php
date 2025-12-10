@@ -71,8 +71,8 @@ while ($row = $sel->fetch_assoc()) {
 
     <!-- Bootstrap 4.5 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-          crossorigin="anonymous">
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
 
     <style>
         /* Estilos para sidebar */
@@ -176,7 +176,7 @@ while ($row = $sel->fetch_assoc()) {
                 <form method="GET" action="">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Buscar en documentos recibidos"
-                               value="<?php echo htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>">
+                            value="<?php echo htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Buscar</button>
                         </div>
