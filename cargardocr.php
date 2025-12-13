@@ -27,11 +27,11 @@ if (empty($_SESSION["usuario"])) {
 include('conexion.php');
 
 function safe_output($s) {
- 
+
     $s = (string)$s;
     
     $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-   
+
     return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
@@ -71,8 +71,8 @@ while ($row = $sel->fetch_assoc()) {
 
     <!-- Bootstrap 4.5 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-          crossorigin="anonymous">
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
 
     <style>
         /* Estilos para sidebar */
@@ -114,7 +114,13 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 
     <div class="ml-auto">
-        <a class="btn btn-light" href="logout.php">Cerrar Sesión</a>
+        <a class="btn btn-light d-flex align-items-center" href="logout.php">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M7.5 1v7h1V1z"/>
+                <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
+            </svg>
+            Cerrar Sesión
+        </a>
     </div>
 </nav>
 
@@ -123,12 +129,40 @@ while ($row = $sel->fetch_assoc()) {
     <div class="p-3">
         <h6>Menú</h6>
         <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">
-                Recibir Nuevo Documento
+            
+            <button type="button" class="list-group-item list-group-item-action d-flex align-items-center" data-toggle="modal" data-target="#exampleModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-fill mr-2" viewBox="0 0 16 16">
+                <path d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223"/>
+                <path d="M2 6.161V7c0 1.007.875 1.755 1.904 2.223C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777C13.125 8.755 14 8.007 14 7v-.839c-.457.432-1.004.751-1.490.972C11.278 7.693 9.682 8 8 8s-3.278-.307-4.510-.867c-.486-.220-1.033-.540-1.490-.972"/>
+                <path d="M2 9.161V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13s3.022-.289 4.096-.777C13.125 11.755 14 11.007 14 10v-.839c-.457.432-1.004.751-1.490.972-1.232.560-2.828.867-4.510.867s-3.278-.307-4.510-.867c-.486-.220-1.033-.540-1.490-.972"/>
+                <path d="M2 12.161V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13v-.839c-.457.432-1.004.751-1.490.972-1.232.560-2.828.867-4.510.867s-3.278-.307-4.510-.867c-.486-.220-1.033-.540-1.490-.972"/>
+                </svg>
+                <div class="text-left">Recibir Nuevo Documento</div>
             </button>
-            <a class="list-group-item list-group-item-action" href="cargardocs.php">Documentos Salidos</a>
-            <a class="list-group-item list-group-item-action" href="cargarexp.php">Expedientes Archivados</a>
-            <a class="list-group-item list-group-item-action" href="index.php">Volver a Inicio</a>
+            
+            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargardocs.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                </svg>
+                Documentos Salidos
+            </a>
+
+
+            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargarexp.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
+                </svg>
+            Expedientes Archivados
+            </a>
+
+            <a class="list-group-item list-group-item-action" href="index.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                </svg>
+            Volver a Inicio
+            </a>
         </div>
         <hr>
         <p class="small text-muted mb-0">Usuario conectado: <?php echo safe_output($_SESSION['usuario']); ?></p>
@@ -148,7 +182,7 @@ while ($row = $sel->fetch_assoc()) {
                 <form method="GET" action="">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Buscar en documentos recibidos"
-                               value="<?php echo htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>">
+                            value="<?php echo htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Buscar</button>
                         </div>
