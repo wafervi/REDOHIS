@@ -14,7 +14,7 @@ Document Management System
 ### **Languages used**
 #### **Backend**
 - PHP
-- SQL
+- MySQL
   
 #### **Frontend**
 - CSS
