@@ -275,7 +275,7 @@ while ($row = $sel->fetch_assoc()) {
 
 <!-- etiqueta del pie de página con el copyright y versionamiento del aplicativo -->
 <footer class="text-center mt-3 mb-4">
-    <p class="small"> Documentado por: <a href="https://github.com/wafervi" target="_blank">@wafervi</a> - SAGEN / CAGESDO © 2022 - <?php echo date('Y'); ?> -  
+    <p class="small"> Desarrollado por: <a href="https://github.com/wafervi" target="_blank">wafervi</a> - SAGEN / CAGESDO © 2022 - <?php echo date('Y'); ?> -  
         <?php
         // Link al repositorio GitHub de Wagner Fernández
         $repo = "wafervi/REDOHIS";
