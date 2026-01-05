@@ -11,7 +11,7 @@ if (empty($_SESSION["usuario"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Expedientes archivados | REDOHIS</title>
+    <title>Expedientes Administrativos Archivados | REDOHIS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap 4.5 -->
@@ -83,6 +83,13 @@ if (empty($_SESSION["usuario"])) {
                 Documentos Recibidos
             </a>
 
+            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargarfov.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zm6.258-6.437a.5.5 0 0 1 .507.013l4 2.5a.5.5 0 0 1 0 .848l-4 2.5A.5.5 0 0 1 6 12V7a.5.5 0 0 1 .258-.437"/>
+                </svg>
+                Fotos y Videos
+            </a>
+
             <a class="list-group-item list-group-item-action" href="index.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
@@ -100,7 +107,7 @@ if (empty($_SESSION["usuario"])) {
     <div class="container-fluid pt-4">
         <div class="row mb-3 align-items-center">
             <div class="col-md-8">
-                <h4>EXPEDIENTES ARCHIVADOS</h4>
+                <h4>EXPEDIENTES ADMINISTRATIVOS ARCHIVADOS</h4>
             </div>
             <div class="col-md-4">
                 <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
@@ -117,7 +124,7 @@ if (empty($_SESSION["usuario"])) {
 
         <div class="card mb-3">
             <div class="card-body">
-                <form action="uploadzip.php" method="post" enctype="multipart/form-data" class="mb-3">
+                <form action="uploadexp.php" method="post" enctype="multipart/form-data" class="mb-3">
                     <div class="form-group">
                         <label for="zipFile">Subir expediente en formato .zip</label>
                         <input type="file" name="zipFile" id="zipFile" class="form-control" accept=".zip">

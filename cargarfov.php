@@ -11,7 +11,7 @@ if (empty($_SESSION["usuario"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Expedientes archivados | REDOHIS</title>
+    <title>Fotos y Videos | REDOHIS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap 4.5 -->
@@ -77,10 +77,17 @@ if (empty($_SESSION["usuario"])) {
             
             <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargardocr.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
-                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
                 </svg>
                 Documentos Recibidos
+            </a>
+
+            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargarexp.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
+                </svg>
+                Expedientes Administrativos Archivados
             </a>
 
             <a class="list-group-item list-group-item-action" href="index.php">
@@ -132,7 +139,7 @@ if (empty($_SESSION["usuario"])) {
 
                 <?php
                 // Obtener archivos de la carpeta "FOTOS EN EL DISCO E:/MULTIMEDIA/FOTOS"
-                $expDir = 'D:/MULTIMEDIA/FOTOS';
+                $expDir = 'D:/REDOHIS/filem';
                 $files = [];
 
                 if (is_dir($expDir)) {
@@ -180,7 +187,7 @@ if (empty($_SESSION["usuario"])) {
                                 } else {
                                     foreach ($pageFiles as $f) {
                                         $safeName = htmlspecialchars($f);
-                                        $fileUrl = 'exp/' . rawurlencode($f);
+                                        $fileUrl = 'filem/' . rawurlencode($f);
                                         echo '<tr>';
                                         echo '<th scope="row" class="align-middle">' . $num++ . '</th>';
                                         echo '<td class="align-middle">' . $safeName . '</td>';
