@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $target_dir = "exp/";  // Directorio donde se guardarán los archivos
+    $target_dir = "filex/";  // Directorio donde se guardarán los archivos
     $target_file = $target_dir . basename($_FILES["zipFile"]["name"]);
     $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
