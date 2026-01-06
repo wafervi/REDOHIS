@@ -124,7 +124,7 @@ if (empty($_SESSION["usuario"])) {
 
         <div class="card mb-3">
             <div class="card-body">
-                <form action="uploadzip.php" method="post" enctype="multipart/form-data" class="mb-3">
+                <form action="uploadexp.php" method="post" enctype="multipart/form-data" class="mb-3">
                     <div class="form-group">
                         <label for="zipFile">Subir expediente en formato .zip</label>
                         <input type="file" name="zipFile" id="zipFile" class="form-control" accept=".zip">
@@ -139,7 +139,7 @@ if (empty($_SESSION["usuario"])) {
 
                 <?php
                 // Obtener archivos de la carpeta "exp"
-                $expDir = __DIR__ . DIRECTORY_SEPARATOR . 'exp';
+                $expDir = __DIR__ . DIRECTORY_SEPARATOR . 'filex';
                 $files = [];
 
                 if (is_dir($expDir)) {
@@ -187,7 +187,7 @@ if (empty($_SESSION["usuario"])) {
                                 } else {
                                     foreach ($pageFiles as $f) {
                                         $safeName = htmlspecialchars($f);
-                                        $fileUrl = 'exp/' . rawurlencode($f);
+                                        $fileUrl = 'filex/' . rawurlencode($f);
                                         echo '<tr>';
                                         echo '<th scope="row" class="align-middle">' . $num++ . '</th>';
                                         echo '<td class="align-middle">' . $safeName . '</td>';
