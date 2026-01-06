@@ -11,7 +11,7 @@ if (empty($_SESSION["usuario"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Expedientes Cerrados | REDOHIS</title>
+    <title>Fotos y Videos | REDOHIS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap 4.5 -->
@@ -83,11 +83,11 @@ if (empty($_SESSION["usuario"])) {
                 Documentos Recibidos
             </a>
 
-            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargarfov.php">
+            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargarexp.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zm6.258-6.437a.5.5 0 0 1 .507.013l4 2.5a.5.5 0 0 1 0 .848l-4 2.5A.5.5 0 0 1 6 12V7a.5.5 0 0 1 .258-.437"/>
+                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
                 </svg>
-                Fotos y Videos
+                Expedientes Cerrados
             </a>
 
             <a class="list-group-item list-group-item-action" href="index.php">
@@ -107,7 +107,7 @@ if (empty($_SESSION["usuario"])) {
     <div class="container-fluid pt-4">
         <div class="row mb-3 align-items-center">
             <div class="col-md-8">
-                <h4>EXPEDIENTES CERRADOS</h4>
+                <h4>FOTOS Y VIDEOS ARCHIVADOS</h4>
             </div>
             <div class="col-md-4">
                 <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
@@ -124,7 +124,7 @@ if (empty($_SESSION["usuario"])) {
 
         <div class="card mb-3">
             <div class="card-body">
-                <form action="uploadzip.php" method="post" enctype="multipart/form-data" class="mb-3">
+                <form action="uploadfov.php" method="post" enctype="multipart/form-data" class="mb-3">
                     <div class="form-group">
                         <label for="zipFile">Subir expediente en formato .zip</label>
                         <input type="file" name="zipFile" id="zipFile" class="form-control" accept=".zip">
@@ -138,8 +138,8 @@ if (empty($_SESSION["usuario"])) {
                 </form>
 
                 <?php
-                // Obtener archivos de la carpeta "exp"
-                $expDir = __DIR__ . DIRECTORY_SEPARATOR . 'exp';
+                // Obtener archivos de la carpeta "FOTOS EN EL DISCO E:/MULTIMEDIA/FOTOS"
+                $expDir = 'D:/REDOHIS/filem';
                 $files = [];
 
                 if (is_dir($expDir)) {
@@ -167,7 +167,7 @@ if (empty($_SESSION["usuario"])) {
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h5 class="panel-title">Lista de Expedientes Cerrados</h5>
+                        <h5 class="panel-title">Lista de Expedientes Archivados</h5>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -187,7 +187,7 @@ if (empty($_SESSION["usuario"])) {
                                 } else {
                                     foreach ($pageFiles as $f) {
                                         $safeName = htmlspecialchars($f);
-                                        $fileUrl = 'exp/' . rawurlencode($f);
+                                        $fileUrl = 'filem/' . rawurlencode($f);
                                         echo '<tr>';
                                         echo '<th scope="row" class="align-middle">' . $num++ . '</th>';
                                         echo '<td class="align-middle">' . $safeName . '</td>';
