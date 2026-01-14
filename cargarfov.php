@@ -139,7 +139,7 @@ if (empty($_SESSION["usuario"])) {
 
                 <?php
                 // Obtener archivos de la carpeta "FOTOS EN EL DISCO E:/MULTIMEDIA/FOTOS"
-                $expDir = 'D:/REDOHIS/filem';
+                $expDir = 'filem';
                 $files = [];
 
                 if (is_dir($expDir)) {
