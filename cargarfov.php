@@ -107,7 +107,7 @@ if (empty($_SESSION["usuario"])) {
     <div class="container-fluid pt-4">
         <div class="row mb-3 align-items-center">
             <div class="col-md-8">
-                <h4>FOTOS Y VIDEOS ARCHIVADOS</h4>
+                <h4>FOTOS Y VIDEOS</h4>
             </div>
             <div class="col-md-4">
                 <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
