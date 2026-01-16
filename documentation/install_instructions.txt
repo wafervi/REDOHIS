@@ -18,3 +18,4 @@ PASSWORD: admin
 - DATABASE TEST NAME -
 
 NAME: uploadfile2
+PATH: database_test/uploadfile2.sql
