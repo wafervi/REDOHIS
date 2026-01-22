@@ -143,15 +143,12 @@ function safe_output($s) {
                     <div class="card-body">
                         <h3>¿Qué es REDOHIS?</h3>
                         <article>
-                            <p>El Repositorio de Documentos Históricos - (REHODIS) es una herramienta para gestionar la información histórica en documentos y expedientes, de acorde a los Sistemas de Gestión de Documentos Electrónicos de Archivo – SGDEA; lo cual orienta conformar y custodiar un archivo electrónico personal e institucional en sus diferentes fases. Por ende, coadyuva a constituir el patrimonio documental electrónico y digital de las personas, empresas, entidades, regiónes o naciones.</p>
-
-                            <p>Está ligado, y hace parte del Componente de Gestión Documental (CAGESDO) del Sistema de Administración General (SAGEN) para conservar esa memoria histórica ante problemas jurídicos, legales y/o administrativos que se presenten.</p>
-
-                            <p>Este sistema, servirá para almacenar  y mostrar los documentos gestionados, producto de las actuaciones a nivel personal, laboral y/o profesional, que han terminado su tiempo de gestión y vigencia en la plataforma Evernote y OneNote de Microsoft Office 365.</p>
-
-                            <p>Con esto, se da cumplimiento la conservación de los archivos en su etapa final y semiactiva.</p>
+                            <p>El Repositorio de Documentos Históricos - (REHODIS) es una herramienta para gestionar la información histórica en documentos y expedientes, basado en en Sistema de Gestión de Documental Electrónica de Archivo – SGDEA; lo cual orienta conformar y custodiar un archivo electrónico personal u organizacional en sus diferentes fases.</p>
 
                             <p>"La poesía es la memoria de la vida y los archivos son su lengua." - Octavio Paz</p>
+                            <div class="text-center mt-4">
+                                <img src="../assets/images/AC.png" alt="AC" class="img-fluid" style="max-width: 100%; height: auto;">
+                            </div>
                         </article>
                     </div>
                 </div>
