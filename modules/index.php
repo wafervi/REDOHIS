@@ -54,7 +54,7 @@ function safe_output($s) {
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <button class="btn btn-outline-light d-md-none mr-2" id="toggleSidebarBtn" type="button">☰</button>
     <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo">
+        <img src="../assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo">
         REDOHIS  <!-- Título de aplicativo en la parte superior izquierda -->
     </a>
 
@@ -66,7 +66,7 @@ function safe_output($s) {
 
     <div class="ml-auto d-flex align-items-center">
 
-        <a class="btn btn-light d-flex align-items-center" href="logout.php">
+        <a class="btn btn-light d-flex align-items-center" href="../auth/logout.php">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path d="M7.5 1v7h1V1z"/>
                 <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>

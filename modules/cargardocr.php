@@ -3,40 +3,56 @@
 session_start();
 
 if (empty($_SESSION["usuario"])) {
+    
+    header("Location: login.html");
+    
+    exit();
+}
+?> <!-- Lo anterior, es el procedimiento de inicio de seión-->
+
+<!DOCTYPE html> 
+<head> 
+	<meta charset="UTF-8">
+	<title>Radicar y visualizar documentos recibidos| REDOHIS</title> <!--Titulo que mostrará en la pestaña del navegador web-->
+</head>
+
+<?php
+
+
+if (empty($_SESSION["usuario"])) {
     header("Location: login.html");
     exit();
 }
 
 include('conexion.php');
 
-
 function safe_output($s) {
 
     $s = (string)$s;
     
-    $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');  //  mantener caracteres UTF-8
+    $decoded = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
     return htmlspecialchars($decoded, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-} // Lo anterior, es el procedimiento, para conectarse con la Base de Datos 'uploadfile'
+}
 
-# Cómo se manejará la búsqueda al insertar datos en la barra diseñada para tal fin
+# Manejar búsqueda
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $searchEsc = $con->real_escape_string($search);
 
-# Paginación es decir, cómo se mostrará la pagina web, que en este caso, de a 5 registros.
+# Se programa para que la paginación se muestre de a 5 registros en el módulo
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $page = max($page, 1);
 $offset = ($page - 1) * $limit;
 
-# Contar total de registros (con filtro)
-$totalQuery = $con->query("SELECT COUNT(*) as total FROM files WHERE title LIKE '%$searchEsc%' OR description LIKE '%$searchEsc%' OR sender LIKE '%$searchEsc%' OR adresse LIKE '%$searchEsc%'");
+# Contar total de registros (con filtro al consultar en la DB)
+$totalQuery = $con->query("SELECT COUNT(*) as total FROM filer WHERE title LIKE '%$searchEsc%' OR description LIKE '%$searchEsc%' OR sender LIKE '%$searchEsc%' OR adresse LIKE '%$searchEsc%'");
 $totalRow = $totalQuery->fetch_assoc();
 $totalRecords = (int)$totalRow['total'];
 $totalPages = $totalRecords > 0 ? ceil($totalRecords / $limit) : 1;
 
-# Obtener registros para la página actual
-$sel = $con->query("SELECT * FROM files WHERE title LIKE '%$searchEsc%' OR description LIKE '%$searchEsc%' OR sender LIKE '%$searchEsc%' OR adresse LIKE '%$searchEsc%' ORDER BY id DESC LIMIT $limit OFFSET $offset");
+# Obtener registros para la página actual al momento de hacer filtrado en la barra de busqueda
+$sel = $con->query("SELECT * FROM filer WHERE title LIKE '%$searchEsc%' OR description LIKE '%$searchEsc%' OR sender LIKE '%$searchEsc%' OR adresse LIKE '%$searchEsc%' ORDER BY id DESC LIMIT $limit OFFSET $offset");
 
 $res = [];
 while ($row = $sel->fetch_assoc()) {
@@ -44,15 +60,16 @@ while ($row = $sel->fetch_assoc()) {
 }
 
 ?>
-    <!-- Inicia la estructura de toda la pagina web -->
+
+<!-- Inicia la estructura de toda la pagina web -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Radicar y visualizar documentos salidos | REDOHIS</title>
+    <title>Radicar y visualizar documentos recibidos | REDOHIS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Librería de Bootstrap 4.5 -->
+    <!-- Bootstrap 4.5 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
         crossorigin="anonymous">
@@ -63,7 +80,7 @@ while ($row = $sel->fetch_assoc()) {
             min-height: 100vh;
             width: 220px;
         }
-        /* Ajuste cuando el sidebar esté oculto en móviles */
+        /* Ajuste cuando el sidebar esté oculto en visualización en dispositivos móviles */
         .content-with-sidebar {
             margin-left: 0;
         }
@@ -85,19 +102,19 @@ while ($row = $sel->fetch_assoc()) {
 </head>
 <body>
 
-<!-- Barra superior del módulo que va en color azul -->
+<!-- Barra superior  del módulo que va en color azul -->
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
-        REDOHIS <!-- Se añade el logo seleccionado para el aplicativo -->
+        <img src="../assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
+        REDOHIS
     </a>
 
     <div class="collapse navbar-collapse">
-        <!-- Espacio para otros elementos si es necesario, que puede servir para futuras actualizaciones -->
+        <!-- Espacio para otros elementos si es necesario en futuras actualizaciones -->
     </div>
 
     <div class="ml-auto">
-        <a class="btn btn-light d-flex align-items-center" href="logout.php">
+        <a class="btn btn-light d-flex align-items-center" href="../auth/logout.php">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path d="M7.5 1v7h1V1z"/>
                 <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
@@ -112,7 +129,7 @@ while ($row = $sel->fetch_assoc()) {
     <div class="p-3">
         <h6>Menú</h6>
         <div class="list-group">
-
+            
             <button type="button" class="list-group-item list-group-item-action d-flex align-items-center" data-toggle="modal" data-target="#exampleModal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-fill mr-2" viewBox="0 0 16 16">
                 <path d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223"/>
@@ -120,26 +137,18 @@ while ($row = $sel->fetch_assoc()) {
                 <path d="M2 9.161V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13s3.022-.289 4.096-.777C13.125 11.755 14 11.007 14 10v-.839c-.457.432-1.004.751-1.490.972-1.232.560-2.828.867-4.510.867s-3.278-.307-4.510-.867c-.486-.220-1.033-.540-1.490-.972"/>
                 <path d="M2 12.161V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13v-.839c-.457.432-1.004.751-1.490.972-1.232.560-2.828.867-4.510.867s-3.278-.307-4.510-.867c-.486-.220-1.033-.540-1.490-.972"/>
                 </svg>
-                <div class="text-left">Radicar Nuevo Documento</div>
+                <div class="text-left">Recibir Nuevo Documento</div>
             </button>
-
-            <a class="list-group-item list-group-item-action d-flex align-items-center" href="https://firmaautenticaciondigital.and.gov.co/bienvenido" target="_blank" rel="noopener noreferrer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-vector-pen mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                    <path fill-rule="evenodd" d="M10.646.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-1.902 1.902-.829 3.313a1.5 1.5 0 0 1-1.024 1.073L1.254 14.746 4.358 4.4A1.5 1.5 0 0 1 5.43 3.377l3.313-.828zm-1.8 2.908-3.173.793a.5.5 0 0 0-.358.342l-2.57 8.565 8.567-2.57a.5.5 0 0 0 .34-.357l.794-3.174-3.6-3.6z"/>
-                    <path fill-rule="evenodd" d="M2.832 13.228 8 9a1 1 0 1 0-1-1l-4.228 5.168-.026.086z"/>
-                </svg>
-                Firmar Documentos Electrónicamente
-            </a>
-
-
-            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargardocr.php">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
-                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-                </svg>
-                Documentos Recibidos
-            </a>
             
+            <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargardocs.php">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                </svg>
+                Documentos Salidos
+            </a>
+
+
             <a class="list-group-item list-group-item-action d-flex align-items-center" href="cargarexp.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
@@ -163,23 +172,23 @@ while ($row = $sel->fetch_assoc()) {
             </a>
         </div>
         <hr>
-        <p class="small text-muted mb-0">Usuario conectado: <?php echo safe_output($_SESSION['usuario']); ?></p> <!-- El usuario que se conecta a la BD -->
+        <p class="small text-muted mb-0">Usuario conectado: <?php echo safe_output($_SESSION['usuario']); ?></p>
     </div>
 </div>
 
-<!-- La página con su respectivo contenido -->
+<!-- Contenido que se mostrará en la página -->
 <div class="content-with-sidebar">
     <div class="container-fluid pt-4">
         <div class="row mb-3 align-items-center">
             <div class="col-md-8">
-                <h4>RADICAR Y VISUALIZAR DOCUMENTOS SALIDOS</h4>
+                <h4>RADICAR Y VISUALIZAR DOCUMENTOS RECIBIDOS</h4>
             </div>
 
             <!-- Barra para Búsqueda de registros -->
             <div class="col-md-4">
                 <form method="GET" action="">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Buscar en documentos salidos"
+                        <input type="text" name="search" class="form-control" placeholder="Buscar en documentos recibidos"
                             value="<?php echo htmlspecialchars($search, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?>">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Buscar</button>
@@ -189,7 +198,7 @@ while ($row = $sel->fetch_assoc()) {
             </div>
         </div>
 
-        <!-- Botones (visibles en pantallas pequeñas o por conveniencia) en el caso de móviles-->
+        <!-- Botones (visibles en pantallas pequeñas o por conveniencia) en el caso de móviles -->
         <div class="d-block d-md-none mb-3">
             <div class="btn-group btn-group-sm" role="group" aria-label="Menú móvil">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Radicar</button>
@@ -222,7 +231,7 @@ while ($row = $sel->fetch_assoc()) {
                             <tr>
                                 <td colspan="10" class="text-center">No se encontraron registros.</td>
                             </tr>
-                        <?php else: ?> 
+                        <?php else: ?>
                             <?php foreach ($res as $val): ?>
                                 <tr>
                                     <td><?php echo safe_output($val['pin']); ?></td>
@@ -268,7 +277,6 @@ while ($row = $sel->fetch_assoc()) {
                         <?php endif; ?>
                     </ul>
                 </nav>
-
             </div>
         </div>
 
@@ -276,7 +284,7 @@ while ($row = $sel->fetch_assoc()) {
 <footer class="text-center mt-3 mb-4">
     <p class="small"> Desarrollado por: <a href="https://github.com/wafervi" target="_blank">wafervi</a> - SAGEN / CAGESDO © 2022 - <?php echo date('Y'); ?> -  
         <?php
-        // Repositorio GitHub de Wagner Fernández
+        // Link al repositorio GitHub de Wagner Fernández
         $repo = "wafervi/REDOHIS";
         $url = "https://api.github.com/repos/$repo/releases/latest";
 
@@ -299,12 +307,12 @@ while ($row = $sel->fetch_assoc()) {
     </div>
 </div>
 
-<!-- Modal para radicar nuevo documento salido -->
+<!-- Modal para radicar nuevo documento recibibido -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="exampleModalLabel" class="modal-title">Radicar nuevo documento</h5>
+                <h5 id="exampleModalLabel" class="modal-title">Recibir nuevo documento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -349,7 +357,7 @@ while ($row = $sel->fetch_assoc()) {
 
                     <div class="form-group">
                         <label for="pin">Radicado del documento</label>
-                        <input type="text" class="form-control" id="pin" name="pin" value="<?php echo rand(); ?>">
+                        <input type="text" class="form-control" id="pin" name="pin" value="<?php echo rand(); ?>"> <!-- método echo rand(); para numeros aleatorios -->
                     </div>
 
                     <div class="form-group">
@@ -372,7 +380,7 @@ while ($row = $sel->fetch_assoc()) {
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="modalPdfLabel" class="modal-title">VISTA DEL DOCUMENTO SALIDO</h5>
+                <h5 id="modalPdfLabel" class="modal-title">VISTA DEL DOCUMENTO RECIBIDO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -380,7 +388,6 @@ while ($row = $sel->fetch_assoc()) {
             <div class="modal-body">
                 <iframe id="iframePDF" frameborder="0"></iframe>
             </div>
-
         </div>
     </div>
 </div>
@@ -407,7 +414,7 @@ while ($row = $sel->fetch_assoc()) {
             sb.classList.add('d-none');
         }
     });
-
+    
     function onSubmitForm() {
         var frm = document.getElementById('form1');
         var data = new FormData(frm);
@@ -417,17 +424,14 @@ while ($row = $sel->fetch_assoc()) {
                 var msg = xhttp.responseText;
                 if (this.status === 200 && msg.indexOf('¡Archivo cargado exitosamente!') !== -1) {
                     alert(msg);
-                    $('#exampleModal').modal('hide');
-                    // Recargar para actualizar la lista de documentos
                     location.reload();
                 } else {
                     alert(msg);
                 }
             }
         };
-        xhttp.open("POST", "uploadfiles.php", true);
+        xhttp.open("POST", "uploadfiler.php", true);
         xhttp.send(data);
-        frm.reset();
     }
 
     function openModelPDF(url) {

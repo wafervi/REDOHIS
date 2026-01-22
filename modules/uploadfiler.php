@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $file_type = $_FILES['file']['type'];
         list($type, $extension) = explode('/', $file_type);
         if ($extension == 'pdf') {
-            $dir = 'files/';
+            $dir = '../filer/';
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);
             }
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
    #luego se hace una consulta mediante INSERT INTO* de los datos escritos en el formulario (cargardoc.php) para que sean almacenados.
-    $ins = $con->query("INSERT INTO files(title,description,sender,adresse,adress,dater,pages,pin,url) VALUES ('$title','$description','$sender','$adresse','$adress','$dater','$pages','$pin','$new_name_file')");
+    $ins = $con->query("INSERT INTO filer(title,description,sender,adresse,adress,dater,pages,pin,url) VALUES ('$title','$description','$sender','$adresse','$adress','$dater','$pages','$pin','$new_name_file')");
 
    #se proyecta un mensaje o cuadro de dialogo. 
     if ($ins) {

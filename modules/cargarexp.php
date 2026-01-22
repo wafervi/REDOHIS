@@ -46,12 +46,12 @@ if (empty($_SESSION["usuario"])) {
     
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
+        <img src="../assets/images/redohis_icon.jpg" alt="CIDOHIS" class="brand-logo mr-2" style="height:32px; width:auto; object-fit:contain;">
         REDOHIS
     </a>
 
     <div class="ml-auto">
-        <a class="btn btn-light d-flex align-items-center" href="logout.php">
+        <a class="btn btn-light d-flex align-items-center" href="../auth/logout.php">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mr-2" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path d="M7.5 1v7h1V1z"/>
                 <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
@@ -139,7 +139,7 @@ if (empty($_SESSION["usuario"])) {
 
                 <?php
                 // Obtener archivos de la carpeta "exp"
-                $expDir = __DIR__ . DIRECTORY_SEPARATOR . 'filex';
+                $expDir = __DIR__ . DIRECTORY_SEPARATOR . '../filex';
                 $files = [];
 
                 if (is_dir($expDir)) {
@@ -187,7 +187,7 @@ if (empty($_SESSION["usuario"])) {
                                 } else {
                                     foreach ($pageFiles as $f) {
                                         $safeName = htmlspecialchars($f);
-                                        $fileUrl = 'filex/' . rawurlencode($f);
+                                        $fileUrl = '../filex/' . rawurlencode($f);
                                         echo '<tr>';
                                         echo '<th scope="row" class="align-middle">' . $num++ . '</th>';
                                         echo '<td class="align-middle">' . $safeName . '</td>';

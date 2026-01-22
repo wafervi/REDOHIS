@@ -26,7 +26,7 @@ if ($resultado->num_rows > 0) {
     $_SESSION["usuario"] = $usuario;
 
     # Redireccionar a la página de inicio
-    header("Location:index.php");
+    header("Location:../modules/index.php");
 } else {
     # No coinciden, así que simplemente imprimimos un mensaje diciendo que es incorrecto, tomando un codigo Javascript:
     echo '<script language="javascript">
