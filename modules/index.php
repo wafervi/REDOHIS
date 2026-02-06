@@ -175,7 +175,7 @@ function safe_output($s) {
 
 <!-- Etiqueta del pie de página con copyright -->
 <footer class="text-center mt-3 mb-4">
-    <p class="small"> Desarrollado por: <a href="https://github.com/wafervi" target="_blank">wafervi</a> - SAGEN / CAGESDO © 2022 - <?php echo date('Y'); ?> -  
+    <p class="small"> Desarrollado por: <a href="https://github.com/wafervi" target="_blank">wafervi</a> - SAGEN / CADIN © 2022 - <?php echo date('Y'); ?> -  
         <?php
         // Acceso al repositorio GitHub de Wagner Fernández
         $repo = "wafervi/REDOHIS";
