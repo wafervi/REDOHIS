@@ -143,7 +143,32 @@ if (empty($_SESSION["usuario"])) {
     </div>
 </div>
 
+<!-- Etiqueta del pie de página con copyright -->
+<footer class="text-center mt-3 mb-4">
+    <p class="small"> Desarrollado por: <a href="https://github.com/wafervi" target="_blank">wafervi</a> - SAGEN / CADIN © 2022 - <?php echo date('Y'); ?> -  
+        <?php
+        // Acceso al repositorio GitHub de Wagner Fernández
+        $repo = "wafervi/REDOHIS";
+        $url = "https://api.github.com/repos/$repo/releases/latest";
 
+        // Inicializa cURL o transferencia de datos
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'wafervi'); // Mi usuario GitHub
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // Decodificación de esa la respuesta
+        $data = json_decode($response, true);
+
+        // Mostrar la versión actual (tag_name) del repositorio GitHub
+        echo isset($data['tag_name']) ? htmlspecialchars($data['tag_name']) : 'No disponible';
+        ?>
+    </p>
+</footer>
+    </div>
+</div>
 
 <!-- Librerías JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
