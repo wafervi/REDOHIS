@@ -116,9 +116,6 @@ if (empty($_SESSION["usuario"])) {
             <div class="col-md-8">
                 <h4>FOTOS Y VIDEOS</h4>
             </div>
-            <div class="col-md-4">
-                <input type="text" id="search" class="form-control" placeholder="Buscar expedientes">
-            </div>
         </div>
 
         <div class="mb-3 d-block d-md-none">
