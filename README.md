@@ -9,7 +9,7 @@
 -------------------------------------------------------------------------------------------------
 ## **About project**
 
-Document Management System
+This application allows you to store personal records as .pdf files and archival folders in .zip format.
 
 ### **Languages used**
 #### **Backend**
