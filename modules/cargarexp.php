@@ -145,7 +145,7 @@ if (empty($_SESSION["usuario"])) {
 
                 <?php
                 // Obtener archivos de la carpeta "exp"
-                $expDir = __DIR__ . DIRECTORY_SEPARATOR . '../filex';
+                $expDir = __DIR__ . DIRECTORY_SEPARATOR . '../archives/filex/';
                 $files = [];
 
                 if (is_dir($expDir)) {
@@ -193,7 +193,7 @@ if (empty($_SESSION["usuario"])) {
                                 } else {
                                     foreach ($pageFiles as $f) {
                                         $safeName = htmlspecialchars($f);
-                                        $fileUrl = '../filex/' . rawurlencode($f);
+                                        $fileUrl = '../archives/filex/' . rawurlencode($f);
                                         echo '<tr>';
                                         echo '<th scope="row" class="align-middle">' . $num++ . '</th>';
                                         echo '<td class="align-middle">' . $safeName . '</td>';

@@ -445,6 +445,7 @@ while ($row = $sel->fetch_assoc()) {
     function openModelPDF(url) {
         // Construir la URL absoluta basándose en el host actual
         var hostRoot = '<?php echo (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on" ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . rtrim(dirname($_SERVER["SCRIPT_NAME"]), "/\\\\") . "/"; ?>';
+        var fullUrl = hostRoot + 'archives/filer/' + decodeURIComponent(url); //ruta donde están los archivos PDF cargados en la carpeta 'files' del proyecto
         // url viene codificada con rawurlencode desde PHP para evitar problemas con espacios/caracteres
         $('#iframePDF').attr('src', hostRoot + decodeURIComponent(url));
         $('#modalPdf').modal('show');

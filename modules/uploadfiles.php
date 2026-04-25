@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $file_type = $_FILES['file']['type'];
         list($type, $extension) = explode('/', $file_type);
         if ($extension == 'pdf') {
-            $dir = '../files/';
+            $dir = '../archives/files/';
             if (!file_exists($dir)) {
                 mkdir($dir, 0777, true);
             }

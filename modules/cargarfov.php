@@ -143,7 +143,7 @@ if (empty($_SESSION["usuario"])) {
 
                 <?php
                 // Obtener archivos de la carpeta "FOTOS EN EL DISCO E:/MULTIMEDIA/FOTOS"
-                $expDir = '../filem';
+                $expDir = '../archives/filem';
                 $files = [];
 
                 if (is_dir($expDir)) {
@@ -191,7 +191,7 @@ if (empty($_SESSION["usuario"])) {
                                 } else {
                                     foreach ($pageFiles as $f) {
                                         $safeName = htmlspecialchars($f);
-                                        $fileUrl = '../filem/' . rawurlencode($f);
+                                        $fileUrl = '../archives/filem/' . rawurlencode($f);
                                         echo '<tr>';
                                         echo '<th scope="row" class="align-middle">' . $num++ . '</th>';
                                         echo '<td class="align-middle">' . $safeName . '</td>';
